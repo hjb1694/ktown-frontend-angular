@@ -1,0 +1,35 @@
+.briefing-list{
+    list-style:none;
+}
+
+.briefing-list__item{
+    display:flex;
+    align-items:flex-start;
+    margin:1rem 0;
+}
+
+.briefing-list__item-text{
+    margin-left:.5rem;
+    font-size:1.8rem;
+    color:#666;
+}
+
+.register-form__briefing-continue-btn{
+    display:block;
+    width:100%;
+    font-size:2rem;
+    font-family:inherit;
+    outline:none;
+    border:0;
+    background:#31913e;
+    color:#fff;
+    padding:1rem;
+    margin-top:2rem;
+    border-radius:.5rem;
+    cursor:pointer;
+}
+
+.register-form__briefing-heading{
+    font-size:1.8rem;
+    margin:1rem 0;
+}

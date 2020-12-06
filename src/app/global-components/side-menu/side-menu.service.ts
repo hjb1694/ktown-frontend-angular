@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 }) 
 export class SideMenuService{
 
-    public sideMenuIsOpen = new BehaviorSubject<boolean>(true);
+    public sideMenuIsOpen = new BehaviorSubject<boolean>(false);
 
     public openSideMenu(){
         this.sideMenuIsOpen.next(true);

@@ -18,3 +18,82 @@ body{
     font-weight: 300;
     background:#f2f2f2;
 }
+
+fieldset{
+    border:none;
+    margin:1.5rem 0;
+}
+
+legend{
+    font-size:2rem;
+}
+
+.form-group{
+    margin:1rem 0;
+}
+
+.label{
+    font-size:1.5rem;
+    display:block;
+    margin-bottom:3px;
+    font-weight:bold;
+}
+
+select{
+    cursor:pointer;
+}
+
+.text-input,
+.select-input{
+    display:block;
+    border:1px solid #ddd;
+    background:#fff;
+    outline:none;
+    font-size:1.8rem;
+    padding:.5rem;
+    width:100%;
+    font-family:inherit;
+    border-radius:.5rem;
+}
+
+.text-input:focus, 
+.select-input:focus{
+    border:1px solid rgb(177, 177, 245)
+}
+
+button{
+    cursor:pointer;
+    font-weight:300;
+}
+
+.btn{
+    border:0;
+    padding:1rem;
+    font-size:2rem;
+    font-family:inherit;
+    border-radius:.5rem;
+}
+
+.btn--block{
+    width:100%;
+    display:block;
+}
+
+.btn--outline{
+    border-width:2px;
+    border-style:solid;
+}
+
+.btn--outline-default{
+    border-color:#ccc;
+}
+
+.btn--primary{
+    background:rgb(59, 108, 199);
+    color:#fff;
+    transition:.3s background;
+}
+
+.btn--primary:hover{
+    background:rgb(35, 65, 122);
+}

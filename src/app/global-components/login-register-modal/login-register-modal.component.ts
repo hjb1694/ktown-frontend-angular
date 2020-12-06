@@ -5,4 +5,9 @@ import {Component} from '@angular/core';
     templateUrl : './login-register-modal.component.html', 
     styleUrls : ['./login-register-modal.component.scss']
 })
-export class LoginRegisterModalComponent{}
+export class LoginRegisterModalComponent{
+
+    public showModal: boolean = true;
+    public showRegisterForm: boolean = true;
+
+}
