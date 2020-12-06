@@ -1,0 +1,17 @@
+<div class="side-menu" [ngClass]="{show : isOpen}" #sideMenu>
+    <div class="side-menu__main" #sideMenuMain>
+        <div class="profile-img-area">
+            <!-- <img src="./no-user.png" class="profile-img-area__img"/> -->
+            <span class="profile-img-area__username">Welcome</span>
+        </div>
+        <app-auth-btns></app-auth-btns>
+        <nav class="nav">
+            <app-nav-link 
+            *ngFor="let link of navLinks"
+            [title]="link.title"
+            [link]="link.link"
+            [img]="link.img"
+            ></app-nav-link>
+        </nav>
+    </div>
+</div>

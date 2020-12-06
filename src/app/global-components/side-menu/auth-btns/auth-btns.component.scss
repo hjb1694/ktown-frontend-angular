@@ -1,0 +1,31 @@
+.side-menu__auth-btns{
+    display:flex;
+}
+
+.side-menu__login-btn, 
+.side-menu__register-btn{
+    font-family:inherit;
+    padding:1.5rem;
+    font-size:1.8rem;
+    display:inline-block;
+    cursor:pointer;
+    flex-grow:1;
+    outline:none;
+}
+
+.side-menu__login-btn{
+    background:#8a7e4a;
+    border:0;
+    color:#fff;
+}
+
+.side-menu__register-btn{
+    background:transparent;
+    border-top:2px solid #8a7e4a;
+    border-bottom:2px solid #8a7e4a;
+    border-right:0;
+    border-left:0;
+    color:#8a7e4a;
+    font-weight:bold;
+    padding:.8rem 1.5rem;
+}
