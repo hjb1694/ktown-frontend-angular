@@ -1,21 +1,31 @@
 <div class="login-register-modal" [ngClass]="{show : showModal}">
     <div class="login-register-modal__main">
-        <button class="login-register-modal__close-btn" title="Close Window">
+        <button 
+        class="login-register-modal__close-btn" 
+        title="Close Window"
+        (click)="closeModal()"
+        >
             <img src="../../../assets/cancel.svg" class="close-icon" alt="Close Modal">
         </button>
         <div class="login-register-modal__form-toggle-btns">
-            <button class="register-form-toggle active">
-                Register
+            <button 
+            class="register-form-toggle"
+            [ngClass]="{active : registerFormIsShown}"
+            (click)="showRegisterForm()"
+            >
+            Register
             </button>
-            <button class="login-form-toggle">
-                Login
+            <button 
+            class="login-form-toggle"
+            [ngClass]="{active : loginFormIsShown}"
+            (click)="showLoginForm()"
+            >
+            Login
             </button>
         </div>
         <div class="login-register-modal__form-container">
-            <app-register-form *ngIf="showRegisterForm"></app-register-form>
-            <form class="login-form">
-                <h2 class="login-form__heading">Sign In</h2>
-            </form>
+            <app-register-form *ngIf="registerFormIsShown"></app-register-form>
+            <app-login-form *ngIf="loginFormIsShown"></app-login-form>
         </div>
     </div>
 </div>

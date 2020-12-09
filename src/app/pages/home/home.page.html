@@ -1,1 +1,51 @@
-<h1>Welcome Home!</h1>
+<div class="container">
+    <header class="header-bar header-bar--home">
+        <img src="../../../assets/ktown_portal_logo.png" class="logo"/>
+        <button class="menu-toggle" (click)="openSideMenu()">
+            <img src="../../../assets/menu.svg" class="menu-toggle__icon"/>
+            <span class="menu-toggle__text">Menu</span>
+        </button>
+    </header>
+    <section class="hero">
+        <div class="searchbox">
+            <img src="../../../assets/search.svg" class="searchbox__icon"/>
+            <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search Knoxville"
+            />
+            <button class="searchbox__btn">
+                <img src="../../../assets/arrow_forward.svg" class="searchbox__arrow"/>
+            </button>
+        </div>
+    </section>
+    <section class="page-tile-display">
+        <a class="page-tile">
+            <img 
+            src="../../../assets/post-its.jpg" 
+            class="page-tile__img"
+            />
+            <div class="page-tile__title">
+                Discussions <img src="../../../assets/arrow_forward.svg"/>
+            </div>
+        </a>
+        <a class="page-tile">
+            <img 
+            src="../../../assets/burger.jpg" 
+            class="page-tile__img"
+            />
+            <div class="page-tile__title">
+                Dining <img src="../../../assets/arrow_forward.svg"/>
+            </div>
+        </a>
+        <a class="page-tile">
+            <img 
+            src="../../../assets/piggy-bank.jpg" 
+            class="page-tile__img"
+            />
+            <div class="page-tile__title">
+                Coupons + Deals <img src="../../../assets/arrow_forward.svg"/>
+            </div>
+        </a>
+    </section>
+</div>

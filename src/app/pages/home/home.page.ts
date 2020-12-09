@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.service';
 
 
 @Component({
@@ -8,5 +9,14 @@ import {Component} from '@angular/core';
 })
 export class HomePage{
 
+    constructor(
+        private sideMenuService: SideMenuService
+    ){}
+
+    public openSideMenu(){
+
+        this.sideMenuService.openSideMenu();
+
+    }
 
 }

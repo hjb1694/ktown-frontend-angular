@@ -97,3 +97,13 @@ button{
 .btn--primary:hover{
     background:rgb(35, 65, 122);
 }
+
+.errbox{
+    font-size:1.8rem;
+    color:#f00;
+    background: rgb(255, 220, 220);
+    border-radius:.5rem;
+    margin:1rem 0;
+    padding:1rem;
+    list-style:none;
+}

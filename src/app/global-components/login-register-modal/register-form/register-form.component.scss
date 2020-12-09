@@ -1,4 +1,19 @@
-.register-form__heading, 
-.login-form__heading{
-    font-size:2.5rem;
+.register-form{
+    &__heading{
+        font-size:2.5rem;
+    }
+
+    &__part-1{
+        display:none;
+        &.show{
+            display:block;
+        }
+    }
+
+    &__part-2{
+        display:none;
+        &.show{
+            display:block;
+        }
+    }
 }

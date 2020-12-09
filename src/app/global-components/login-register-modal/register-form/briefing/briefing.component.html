@@ -1,39 +1,18 @@
 <div class="register-form__briefing">
     <h3 class="register-form__briefing-heading">Why Sign Up for KTOWN Portal?</h3>
     <ul class="briefing-list">
-        <li class="briefing-list__item">
+        <li *ngFor="let item of briefingListItems" class="briefing-list__item">
             <img src="../../../assets/check_box.svg" alt="checkmark icon">
             <span class="briefing-list__item-text">
-                Earn points for participation. Redeem those points for rewards.
-            </span>
-        </li>
-        <li class="briefing-list__item">
-            <img src="../../../assets/check_box.svg" alt="checkmark icon">
-            <span class="briefing-list__item-text">
-                Share your knoweledge and experience with others.
-            </span>
-        </li>
-        <li class="briefing-list__item">
-            <img src="../../../assets/check_box.svg" alt="checkmark icon">
-            <span class="briefing-list__item-text">
-                Meet and engage with others around the area.
-            </span>
-        </li>
-        <li class="briefing-list__item">
-            <img src="../../../assets/check_box.svg" alt="checkmark icon">
-            <span class="briefing-list__item-text">
-                Share your insights with visitors and prospective
-                residents of Knoxville/Knox County.
-            </span>
-        </li>
-        <li class="briefing-list__item">
-            <img src="../../../assets/check_box.svg" alt="checkmark icon">
-            <span class="briefing-list__item-text">
-                Level up and earn badges along the way!
+                {{ item }}
             </span>
         </li>
     </ul>
-    <button type="button" class="register-form__briefing-continue-btn">
+    <button 
+    type="button" 
+    class="register-form__briefing-continue-btn"
+    (click)="goToPartOne()"
+    >
         Yes, take me to registration!
     </button>
 </div>
