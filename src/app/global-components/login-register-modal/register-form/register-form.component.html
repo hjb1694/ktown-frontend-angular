@@ -108,6 +108,7 @@
             type="text" 
             id="register-input" 
             class="text-input"
+            maxlength="12"
             formControlName="username"
             />
         </div>
@@ -117,6 +118,7 @@
             type="password" 
             id="register-password" 
             class="text-input"
+            maxlength="15"
             formControlName="password"
             />
         </div>
@@ -126,13 +128,18 @@
             type="password" 
             id="register-confirm-password" 
             class="text-input"
+            maxlength="15"
             formControlName="confirmPassword"
             />
         </div>
         <div class="form-group">
-            <button typw="submit" class="btn btn--block btn--primary">
-                Complete Registration
+            <button typw="submit" class="btn btn--block btn--primary" [disabled]="processing">
+                <span *ngIf="!processing">Complete Registration</span>
+                <img *ngIf="processing" src="../../../../assets/rolling-spinner-primary.gif" class="spinner" alt="Processing..."/>
             </button>
         </div>
+        <ul *ngIf="errMsgs.partTwo.length" class="errbox">
+            <li *ngFor="let msg of errMsgs.partTwo">{{ msg }}</li>
+        </ul>
     </div>
 </form>

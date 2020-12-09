@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
+import { AuthService } from 'src/app/services/auth.service';
 import {CustomValidators} from '../../../custom-validators/text-validators';
+import { LoginRegisterModalService } from '../login-register-modal.service';
 
 @Component({
     selector : 'app-register-form', 
@@ -18,6 +20,12 @@ export class RegisterFormComponent implements OnInit{
         partOne : [], 
         partTwo : []
     }
+    public processing: boolean = false;
+
+    constructor(
+        private authService: AuthService, 
+        private loginRegisterModalService: LoginRegisterModalService
+    ){}
 
     ngOnInit(){
 
@@ -35,7 +43,7 @@ export class RegisterFormComponent implements OnInit{
                 CustomValidators.isValidEmail
             ]), 
             username : new FormControl('', [
-                Validators.pattern(/^[A-Z0-9]{8,15}$/i)
+                CustomValidators.isValidUsername
             ]), 
             password : new FormControl('', [
                 CustomValidators.isValidPassword
@@ -90,7 +98,7 @@ export class RegisterFormComponent implements OnInit{
         let isValid: boolean = true;
 
         this.validatePartTwoField('email', 'Please enter a valid email address.');
-        this.validatePartTwoField('username', 'Username must contain only letters and numbers');
+        this.validatePartTwoField('username', 'Username must be between 6 and 12 characters and contain only letters and numbers');
         this.validatePartTwoField('password', 'Password must contain be between 8 to 15 characters and have at least (1) uppercase letter, (1) lowercase letter, and (1) number.');
 
         if(this.registerForm.get('password').value !== this.registerForm.get('confirmPassword').value){
@@ -113,8 +121,39 @@ export class RegisterFormComponent implements OnInit{
     }
 
     public submitForm(): void {
-        if(!this.validatePartTwo) return;
-        console.log('passed.');
+        console.log('submit form');
+        if(!this.validatePartTwo()) return;
+        console.log('processing...');
+        this.processing = true;
+
+        const birthMonth = this.registerForm.get('birthMonth').value;
+        const birthDay = this.registerForm.get('birthDay').value;
+        const birthYear = this.registerForm.get('birthYear').value;
+
+        const sendData = {
+            email : this.registerForm.get('email').value, 
+            username : this.registerForm.get('username').value, 
+            password : this.registerForm.get('password').value,
+            dob : `${birthMonth}-${birthDay}-${birthYear}`
+        }
+
+        this.authService.register(sendData).subscribe(resp => {
+
+            this.loginRegisterModalService.showModal.next(false);
+
+        }, err => {
+
+            if(err.error?.errorShortText === 'FORM_VALIDATION_ERR'){
+                for(let {msg} of err.error.body.errors){
+                    this.errMsgs.partTwo.push(msg);
+                }
+            }else{
+                this.errMsgs.partTwo.push('There was an issue processing your request.');
+            }
+
+        }).add(() => {
+            this.processing = false;
+        });
     }
 
     public generateBirthYears(): void{

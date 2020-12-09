@@ -8,6 +8,8 @@ import {HomePageModule} from './pages/home/home.module';
 import {SideMenuModule} from './global-components/side-menu/side-menu.module';
 import {LoginRegisterModalModule} from './global-components/login-register-modal/login-register-modal.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +19,8 @@ import {LoginRegisterModalModule} from './global-components/login-register-modal
     AppRoutingModule, 
     HomePageModule, 
     SideMenuModule,
-    LoginRegisterModalModule
+    LoginRegisterModalModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
