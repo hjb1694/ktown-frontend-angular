@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { SideMenuService } from './side-menu.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { SideMenuService } from './side-menu.service';
 })
 export class SideMenuComponent implements OnInit, AfterViewInit{
     public isOpen: boolean = false;
+    public user = null;
     public navLinks = [
         {
             title : 'Discussions', 
@@ -40,12 +42,14 @@ export class SideMenuComponent implements OnInit, AfterViewInit{
 
     constructor(
         private renderer: Renderer2, 
-        private sideMenuService: SideMenuService
+        private sideMenuService: SideMenuService, 
+        private authService: AuthService
     ){}
 
     ngOnInit(){
 
         this.sideMenuService.sideMenuIsOpen.subscribe(value => this.isOpen = value);
+        this.authService.user.subscribe(value => this.user = value);
 
     }
 
@@ -59,5 +63,9 @@ export class SideMenuComponent implements OnInit, AfterViewInit{
             e.stopImmediatePropagation();
         });
 
+    }
+
+    public logout(): void{
+        this.authService.logout();
     }
 }

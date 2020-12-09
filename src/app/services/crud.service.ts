@@ -19,7 +19,7 @@ export class CrudService{
         let headers = new HttpHeaders();
 
         if(requiresAuth){
-            headers = headers.append('Authorization', this.authService.user.token);
+            headers = headers.append('Authorization', this.authService.user.getValue().token);
         }
 
         return this.http.post(`${apiUrl}/${path}`, body, {headers});

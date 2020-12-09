@@ -1,10 +1,18 @@
 <div class="side-menu" [ngClass]="{show : isOpen}" #sideMenu>
     <div class="side-menu__main" #sideMenuMain>
         <div class="profile-img-area">
-            <!-- <img src="./no-user.png" class="profile-img-area__img"/> -->
-            <span class="profile-img-area__username">Welcome</span>
+            <img src="../../../assets/no-user.png" class="profile-img-area__img"/>
+            <span *ngIf="!user" class="profile-img-area__username">Welcome</span>
+            <span *ngIf="user" class="profile-img-area__username">{{ user.username }}</span>
         </div>
-        <app-auth-btns></app-auth-btns>
+        <app-auth-btns *ngIf="!user"></app-auth-btns>
+        <div *ngIf="user" class="user-area">
+            <a class="user-area__link">View Profile</a>
+            <a class="user-area__link">Notifications</a>
+            <a class="user-area__link">Messages</a>
+            <a class="user-area__link">Settings</a>
+            <a (click)="logout()" class="user-area__link">Logout</a>
+        </div>
         <nav class="nav">
             <app-nav-link 
             *ngFor="let link of navLinks"

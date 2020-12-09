@@ -48,3 +48,20 @@
     font-size:2rem;
     color:#666;
 }
+
+.user-area{
+    border-bottom:1px solid #ccc;
+    border-top:1px solid #ccc;
+    background:#8a7e4a;
+
+    &__link{
+        display:block;
+        font-size:1.8rem;
+        padding:1rem 1.5rem;
+        color:#fff;
+
+        &:not(:last-child){
+            border-bottom:1px solid #fff;
+        }
+    }
+}

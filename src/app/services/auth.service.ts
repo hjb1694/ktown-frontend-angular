@@ -12,15 +12,11 @@ const { apiUrl } = environment;
 })
 export class AuthService{
 
-    private _user = new BehaviorSubject(null);
+    public user = new BehaviorSubject(null);
 
     constructor(
         private http: HttpClient
     ){}
-
-    public get user(){
-        return this._user.getValue();
-    }
 
     public register(sendData): Observable<any> {
 
@@ -29,10 +25,40 @@ export class AuthService{
                 return throwError(err);
             }),
             tap(resp => {
-                console.log(resp);
-                this._user.next(resp);
+                this.user.next(resp);
+                sessionStorage.setItem('user', JSON.stringify(resp));
             })
         );
+
+    }
+
+
+    public login(sendData){
+
+        return this.http.post(`${apiUrl}/auth/login`, sendData).pipe(
+            catchError(err => {
+                return throwError(err);
+            }),
+            tap(resp => {
+                this.user.next(resp);
+                sessionStorage.setItem('user', JSON.stringify(resp));
+            })
+        );;
+
+    }
+
+    public logout(){
+        this.user.next(null);
+        sessionStorage.clear();
+    }
+
+    public autoLogin(){
+
+        const userJSON = sessionStorage.getItem('user');
+
+        if(userJSON){
+            this.user.next(JSON.parse(userJSON));
+        }
 
     }
 
