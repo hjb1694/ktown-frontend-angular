@@ -1,0 +1,65 @@
+.email-verification-modal{
+    position:fixed;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.8);
+    z-index:10;
+    padding:1.5rem;
+
+    &__main{
+        width:50rem;
+        padding:1rem;
+        border-radius:.5rem;
+        background:#fff;
+    }
+
+    &__text{
+        font-size:1.8rem;
+        color:#333;
+    }
+}
+
+.resend-vericode-link{
+    font-size:1.8rem;
+    color:#3b6cc7;
+    font-weight:bold;
+    display:block;
+    text-align:center;
+    margin-top:2rem;
+}
+
+.loading-spinner{
+    width:6rem;
+    display:block;
+    width:7rem;
+    margin:auto;
+}
+
+.enter-code-link{
+    font-size:1.8rem;
+    color:#3b6cc7;
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    margin:1.5rem 0;
+}
+
+.close-link{
+    font-size:1.8rem;
+    color:red;
+    display:block;
+    text-align:center;
+    font-weight:bold;
+    margin:1.5rem 0;
+}
+
+.message-text{
+    font-size:2rem;
+    text-align:center;
+    margin:2rem 0;
+}

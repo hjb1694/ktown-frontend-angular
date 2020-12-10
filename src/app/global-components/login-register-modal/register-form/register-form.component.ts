@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { AuthService } from 'src/app/services/auth.service';
 import {CustomValidators} from '../../../custom-validators/text-validators';
+import { EmailVerificationModalService } from '../../email-verification-modal/email-verification-modal.service';
 import { LoginRegisterModalService } from '../login-register-modal.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class RegisterFormComponent implements OnInit{
 
     constructor(
         private authService: AuthService, 
-        private loginRegisterModalService: LoginRegisterModalService
+        private loginRegisterModalService: LoginRegisterModalService, 
+        private emailVerificationModalService: EmailVerificationModalService
     ){}
 
     ngOnInit(){
@@ -140,6 +142,7 @@ export class RegisterFormComponent implements OnInit{
         this.authService.register(sendData).subscribe(resp => {
 
             this.loginRegisterModalService.showModal.next(false);
+            this.emailVerificationModalService.showModal.next(true);
 
         }, err => {
 

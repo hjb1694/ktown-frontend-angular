@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import {CustomValidators} from '../../../custom-validators/text-validators';
+import { EmailVerificationModalService } from '../../email-verification-modal/email-verification-modal.service';
 import { LoginRegisterModalService } from '../login-register-modal.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginFormComponent implements OnInit{
 
     constructor(
         private authService: AuthService, 
-        private loginRegisterModalService: LoginRegisterModalService
+        private loginRegisterModalService: LoginRegisterModalService, 
+        private emailVerificationModalService: EmailVerificationModalService
     ){}
 
     ngOnInit(){
@@ -58,6 +60,10 @@ export class LoginFormComponent implements OnInit{
             this.loginForm.reset();
             this.errMsgs = [];
             this.loginRegisterModalService.showModal.next(false);
+
+            if(!this.authService.user.getValue().isVerified){
+                this.emailVerificationModalService.showModal.next(true);
+            }
 
         }, err => {
             if(err.error?.errorShortText === 'FORM_VALIDATION_ERR'){

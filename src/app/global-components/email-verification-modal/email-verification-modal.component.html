@@ -1,0 +1,29 @@
+<div *ngIf="showModal" class="email-verification-modal">
+    <div class="email-verification-modal__main">
+        <img *ngIf="showProcessing" class="loading-spinner" src="../../../assets/rolling-spinner-blue-white-bg.gif"/>
+        <form *ngIf="showForm" [formGroup]="veriCodeForm" (ngSubmit)="processForm()">
+            <h1>Email Verification</h1>
+            <p class="email-verification-modal__text">
+                An email was sent to your email address containing a verification code. You must provide this verification code 
+                to use Ktown Portal. Please enter the verification code below. You will only have to do this once for this account.
+            </p>
+            <div class="form-group">
+                <input type="text" formControlName="vericode" placeholder="Enter Verification Code Here" class="text-input">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn--primary btn--block">Continue</button>
+            </div>
+            <div class="form-group">
+                <a (click)="resendVerification()" class="resend-vericode-link">Resend Verification Code</a>
+            </div>
+            <div class="form-group">
+                <a (click)="closeModal()" class="close-link">Close</a>
+            </div>
+        </form>
+        <div *ngIf="showMessage" class="responseMessage">
+            <p class="message-text">{{ message }}</p>
+            <a (click)="enableShowForm()" class="enter-code-link">Enter Verification Code</a>
+            <a (click)="closeModal()" class="close-link">Close</a>
+        </div>
+    </div>
+</div>

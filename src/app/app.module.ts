@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {HomePageModule} from './pages/home/home.module';
 import {SideMenuModule} from './global-components/side-menu/side-menu.module';
 import {LoginRegisterModalModule} from './global-components/login-register-modal/login-register-modal.module';
+import {EmailVerificationModalModule} from './global-components/email-verification-modal/email-verification-modal.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomePageModule, 
     SideMenuModule,
     LoginRegisterModalModule, 
+    EmailVerificationModalModule,
     HttpClientModule
   ],
   providers: [],
