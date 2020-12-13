@@ -4,6 +4,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 const { apiUrl } = environment;
 
 
@@ -15,7 +16,8 @@ export class AuthService{
     public user = new BehaviorSubject(null);
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient, 
+        private router: Router
     ){}
 
     public register(sendData): Observable<any> {
@@ -50,6 +52,7 @@ export class AuthService{
     public logout(){
         this.user.next(null);
         sessionStorage.clear();
+        this.router.navigateByUrl('/');
     }
 
     public autoLogin(){

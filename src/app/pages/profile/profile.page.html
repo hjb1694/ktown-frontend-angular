@@ -1,0 +1,102 @@
+<div class="container">
+    <header class="header-bar">
+        <img src="../../../assets/ktown_portal_logo.png" class="logo"/>
+        <button class="menu-toggle" (click)="openSideMenu()">
+            <img src="../../../assets/menu.svg" class="menu-toggle__icon"/>
+            <span class="menu-toggle__text">Menu</span>
+        </button>
+    </header>
+    <div class="main-area">
+        <img *ngIf="isLoading.main" class="spinner" src="../../../assets/rolling-spinner-grey.gif"/>
+        <div *ngIf="fetchErrorMsg.main" class="fetchErrorBox">
+            <h2>Ooops!</h2>
+            <p class="fetchErrorBox__message">{{ fetchErrorMsg.main }}</p>
+        </div>
+        <ng-container *ngIf="!isLoading.main && !fetchErrorMsg.main">
+            <div class="banner">
+                <div *ngIf="showBadge" class="role-tag">
+                    <img class="badge" src="../../../assets/police-badge.png" alt="badge"/>
+                    <ng-container [ngSwitch]="profileData.main.role">
+                        <span *ngSwitchCase="2">Bronze Moderator</span>
+                        <span *ngSwitchCase="3">Silver Moderator</span>
+                        <span *ngSwitchCase="4">Gold Moderator</span>
+                        <span *ngSwitchCase="5">Staff</span>
+                        <span *ngSwitchCase="6">Administrator</span>
+                    </ng-container>
+                </div>
+                <div *ngIf="showActionDropdown" class="btn-dropdown profile-action-dropdown">
+                    <button class="profile-action-btn" (click)="toggleOpts()">
+                        <img *ngIf="!showOpts" src="../../../assets/arrow_drop_down.svg"/>
+                        <img *ngIf="showOpts" src="../../../assets/arrow_drop_up.svg"/>
+                        Actions
+                    </button>
+                    <div class="btn-dropdown-opts" *ngIf="showOpts">
+                        <button *ngIf="showActions.followUser" class="btn-dropdown-opt">
+                            Follow User
+                        </button>
+                        <button *ngIf="showActions.unfollowUser" class="btn-dropdown-opt">
+                            Unfollow User
+                        </button>
+                        <button *ngIf="showActions.undoFollowRequest" class="btn-dropdown-opt">
+                            Undo Follow Request
+                        </button>
+                        <button *ngIf="showActions.blockUser" class="btn-dropdown-opt">
+                            Block User
+                        </button>
+                        <button *ngIf="showActions.unblockUser" class="btn-dropdown-opt">
+                            Unblock User
+                        </button>
+                        <button *ngIf="showActions.reportUser" class="btn-dropdown-opt">
+                            Report User
+                        </button>
+                        <button *ngIf="showActions.editProfile" class="btn-dropdown-opt" routerLink="/edit-profile">
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+                <img class="profile-img" [src]="!profileData.main.profileImg ? '../../../assets/no-user.png' : profileData.main.profileImg"/>
+                <div class="username">{{ userName }}</div>
+            </div> 
+            <div class="profile-content">
+                <div *ngIf="profileMessages.showDeactivated" class="profile-msg">
+                    This user has been deactivated.
+                </div>
+                <div *ngIf="profileMessages.showOwnPrivate" class="profile-msg">
+                    Your profile is private. Only you and your followers can see its contents.
+                </div>
+                <div *ngIf="profileMessages.showPrivate" class="profile-msg">
+                    Private Profile
+                </div>
+                <ng-container *ngIf="showAboutData">
+                    <div class="bio-container tile">
+                        <h2 class="tile-heading">Bio</h2>
+                        <p *ngIf="!profileData.about.bio" class="nobio">
+                            No Bio :(
+                        </p>
+                        <p *ngIf="profileData.about.bio" class="bio">
+                            {{ profileData.about.bio }}
+                        </p>
+                    </div>
+                    <div class="tile">
+                        <h2 class="tile-heading">Occupation</h2>
+                        <p *ngIf="!profileData.about.occupation" class="not-specified">
+                            Not Specified
+                        </p>
+                        <p *ngIf="profileData.about.occupation" class="occupation">
+                            {{ profileData.about.occupation }}
+                        </p>
+                    </div>
+                    <div class="tile">
+                        <h2 class="tile-heading">Location</h2>
+                        <p *ngIf="!profileData.about.location" class="not-specified">
+                            Not Specified
+                        </p>
+                        <p *ngIf="profileData.about.location" class="location">
+                            {{ profileData.about.location }}
+                        </p>
+                    </div>
+                </ng-container>
+            </div>           
+        </ng-container>
+    </div>
+</div>

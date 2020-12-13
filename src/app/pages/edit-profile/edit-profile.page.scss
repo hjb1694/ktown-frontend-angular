@@ -1,0 +1,40 @@
+.header-bar{
+    padding:.5rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    will-change:transform;
+    box-shadow: 0 0 1rem rgba(0,0,0,.24);
+}
+
+.page-heading{
+    text-align:center;
+    font-size:3rem;
+    margin:2rem 0;
+    color:#555;
+}
+
+.main-area{
+    padding:1.5rem;
+}
+
+.edit-profile-img-area{
+    margin:2rem 0;
+}
+
+.profile-img{
+    display:block;
+    border-radius:90%;
+    margin:auto;
+    width:15rem;
+}
+
+.edit-profile-img-btn{
+    display:block;
+    margin:1rem auto;
+}
+
+.edit-profile-form{
+    max-width:50rem;
+    margin:auto;
+}

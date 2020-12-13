@@ -19,6 +19,46 @@ body{
     background:#f2f2f2;
 }
 
+.container{
+    max-width:140rem;
+    margin:0 auto;
+    background:#fff;
+    box-shadow:0 0 1rem rgba(0,0,0,.3);
+    position:relative;
+}
+
+.menu-toggle{
+    display:flex;
+    align-items:center;
+    font-family:inherit;
+    background:transparent;
+    border:0;
+    outline:none;
+    margin:1rem;
+    cursor:pointer;
+    transition:.3s transform;
+}
+
+.menu-toggle:hover{
+    transform:scale(1.06);
+}
+
+
+.menu-toggle__icon{
+    width:5rem;
+}
+
+.menu-toggle__text{
+    font-size:2.3rem;
+    color:#888;
+}
+
+
+
+.logo{
+    height:8rem;
+}
+
 fieldset{
     border:none;
     margin:1.5rem 0;
@@ -44,7 +84,8 @@ select{
 }
 
 .text-input,
-.select-input{
+.select-input, 
+.text-area{
     display:block;
     border:1px solid #ddd;
     background:#fff;
@@ -56,8 +97,14 @@ select{
     border-radius:.5rem;
 }
 
+.text-area{
+    height:15rem;
+    resize:none;
+}
+
 .text-input:focus, 
-.select-input:focus{
+.select-input:focus, 
+.text-area:focus {
     border:1px solid rgb(177, 177, 245)
 }
 

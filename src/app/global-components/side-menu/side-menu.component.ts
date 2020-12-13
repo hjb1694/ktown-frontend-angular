@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { SideMenuService } from './side-menu.service';
 
@@ -43,7 +44,8 @@ export class SideMenuComponent implements OnInit, AfterViewInit{
     constructor(
         private renderer: Renderer2, 
         private sideMenuService: SideMenuService, 
-        private authService: AuthService
+        private authService: AuthService, 
+        private router: Router
     ){}
 
     ngOnInit(){
@@ -67,5 +69,11 @@ export class SideMenuComponent implements OnInit, AfterViewInit{
 
     public logout(): void{
         this.authService.logout();
+        this.sideMenuService.closeSideMenu();
+    }
+
+    public goToProfile(){
+        this.router.navigate(['/profile', this.authService.user.getValue().username]);
+        this.sideMenuService.closeSideMenu();
     }
 }

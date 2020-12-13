@@ -1,0 +1,36 @@
+<div class="container">
+    <header class="header-bar">
+        <img src="../../../assets/ktown_portal_logo.png" class="logo"/>
+        <button class="menu-toggle" (click)="openSideMenu()">
+            <img src="../../../assets/menu.svg" class="menu-toggle__icon"/>
+            <span class="menu-toggle__text">Menu</span>
+        </button>
+    </header>
+    <div class="main-area">
+        <h1 class="page-heading">Edit Profile</h1>
+        <div class="edit-profile-img-area">
+            <img [src]="profileImg" class="profile-img" alt="Profile Image">
+            <button class="btn btn--primary edit-profile-img-btn">
+                <img src="../../../assets/create.svg" alt="Edit Profile Image"/>
+                Change Profile Image
+            </button>
+        </div>
+        <form class="edit-profile-form">
+            <div class="form-group">
+                <label for="bio" class="label">Bio</label>
+                <textarea class="text-area"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="occupation" class="label">Occupation</label>
+                <input type="text" id="occupation" class="text-input"/>
+            </div>
+            <div class="form-group">
+                <label for="location" class="label">Location</label>
+                <input type="text" id="location" class="text-input"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn--primary btn--block">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

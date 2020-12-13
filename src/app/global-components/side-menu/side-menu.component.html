@@ -7,7 +7,7 @@
         </div>
         <app-auth-btns *ngIf="!user"></app-auth-btns>
         <div *ngIf="user" class="user-area">
-            <a class="user-area__link">View Profile</a>
+            <a (click)="goToProfile()" class="user-area__link">View Profile</a>
             <a class="user-area__link">Notifications</a>
             <a class="user-area__link">Messages</a>
             <a class="user-area__link">Settings</a>

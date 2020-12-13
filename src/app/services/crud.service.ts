@@ -29,4 +29,17 @@ export class CrudService{
     }
 
 
+    public get(path: string, requiresAuth: boolean = false){
+
+        let headers = new HttpHeaders();
+
+        if(requiresAuth){
+            headers = headers.append('authorization', `Bearer ${this.authService.user.getValue().token}`);
+        }
+
+        return this.http.get(`${apiUrl}/${path}`, {headers});
+
+    }
+
+
 }
