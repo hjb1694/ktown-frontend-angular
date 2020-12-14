@@ -31,13 +31,25 @@
                         Actions
                     </button>
                     <div class="btn-dropdown-opts" *ngIf="showOpts">
-                        <button *ngIf="showActions.followUser" class="btn-dropdown-opt">
+                        <button 
+                        *ngIf="showActions.followUser" 
+                        class="btn-dropdown-opt"
+                        (click)="followUser()"
+                        >
                             Follow User
                         </button>
-                        <button *ngIf="showActions.unfollowUser" class="btn-dropdown-opt">
+                        <button 
+                        *ngIf="showActions.unfollowUser" 
+                        class="btn-dropdown-opt"
+                        (click)="unfollowUser()"
+                        >
                             Unfollow User
                         </button>
-                        <button *ngIf="showActions.undoFollowRequest" class="btn-dropdown-opt">
+                        <button 
+                        *ngIf="showActions.undoFollowRequest" 
+                        class="btn-dropdown-opt"
+                        (click)="unfollowUser()"
+                        >
                             Undo Follow Request
                         </button>
                         <button *ngIf="showActions.blockUser" class="btn-dropdown-opt">

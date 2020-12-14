@@ -1,5 +1,7 @@
+import { SelectorMatcher } from '@angular/compiler';
 import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { EmailVerificationModalService } from 'src/app/global-components/email-verification-modal/email-verification-modal.service';
 import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CrudService } from 'src/app/services/crud.service';
@@ -52,7 +54,8 @@ export class ProfilePage implements OnInit{
         private sideMenuService: SideMenuService, 
         private route: ActivatedRoute, 
         private authService: AuthService, 
-        private crudService: CrudService
+        private crudService: CrudService, 
+        private emailVerificationModalService : EmailVerificationModalService
     ){}
 
     ngOnInit(){
@@ -60,9 +63,18 @@ export class ProfilePage implements OnInit{
         this.route.params.subscribe((params: Params) => {
             this.fetchErrorMsg.main = null;
             this.userName = params['username']; 
-            this.fetchMainProfileData();
 
-            
+            this.showActions = {
+                editProfile : false, 
+                followUser : false, 
+                unfollowUser : false,
+                undoFollowRequest : false,
+                blockUser : false, 
+                unblockUser : false, 
+                reportUser : false
+            }
+
+            this.fetchMainProfileData(); 
         });
 
     }
@@ -79,12 +91,8 @@ export class ProfilePage implements OnInit{
                 this.profileMessages.showDeactivated = true;
             }else{
 
-                if(this.profileData.main.role && this.profileData.main.role > 1){
-                    this.showBadge = true;
-                }else{
-                    this.showBadge = false;
-                }
-
+                this.showBadge = (this.profileData.main.role && this.profileData.main.role > 1);
+        
                 this.listenForUser();
             }
 
@@ -211,9 +219,16 @@ export class ProfilePage implements OnInit{
 
                 console.log('statuses between users: ', resp);
 
-                this.showActions.reportUser = (+this.profileData.main.role < 5 && this.loggedInUserRole < 5);
+                this.showActions.reportUser = (
+                    +this.profileData.main.role < 5 && 
+                    this.loggedInUserRole < 5
+                );
               
-                this.showActions.blockUser = (+this.profileData.main.role < 5 && resp.body.hasBlockedUser === false && this.loggedInUserRole < 5);
+                this.showActions.blockUser = (
+                    +this.profileData.main.role < 5 && 
+                    resp.body.hasBlockedUser === false && 
+                    this.loggedInUserRole < 5
+                );
                 
 
                 this.showActions.unblockUser = resp.body.hasBlockedUser === true;
@@ -224,11 +239,14 @@ export class ProfilePage implements OnInit{
                     resp.body.blockedByOtherUser === false
                 ){
 
-                    if(resp.body.isFollowingUser === false && resp.body.followRequestPending === false){
-                        this.showActions.followUser = true;
-                    }else{
-                        this.showActions.followUser = false;
-                    }
+                    this.showActions.followUser = (
+                        resp.body.isFollowingUser === false && 
+                        resp.body.followRequestPending === false
+                    )
+
+                    this.showActions.unfollowUser = resp.body.isFollowingUser === true;
+
+                    this.showActions.undoFollowRequest = resp.body.followRequestPending === true;
 
                 }else{
                     this.showActions.followUser = false;
@@ -262,6 +280,79 @@ export class ProfilePage implements OnInit{
 
     public toggleOpts(){
         this.showOpts = !this.showOpts;
+    }
+
+
+    /// Action Buttons Handlers
+
+    public followUser(){
+        
+        this.crudService.post(
+            'social/follow-user',
+            {userId : this.profileData.main.userId},
+            true
+        )
+        .subscribe((resp: any) => {
+
+            if(resp.body?.shortMsg === 'PENDING'){
+                alert('A follow request has been sent and is pending acceptance!');
+                this.showActions.undoFollowRequest = true;
+            }else if(resp.body?.shortMsg === 'FOLLOWING'){
+                alert('You are now following this user!');
+                this.showActions.unfollowUser = true;
+            }
+
+            this.showActions.followUser = false;
+            this.showOpts = false;
+
+        }, err => {
+
+            if(err.error?.errorShortText){
+
+                switch(err.error.errorShortText){
+                    case 'ERR_NOT_VERIFIED':
+                        this.emailVerificationModalService.showModal.next(true);
+                    break;
+                    case 'ERR_USER_ACCT_FROZEN':
+                        alert('You account is frozen an is under review by staff.');
+                    break;
+                    case 'ERR_BLOCK':
+                        alert('You have either blocked this user or are blocked by this user.');
+                        this.showActions.followUser = false; 
+                        this.showActions.unfollowUser = false;
+                    break;
+                    case 'ERR_ALREADY_FOLLOWING':
+                        alert('You are already following this user!');
+                    break;
+                    default:
+                        alert('Unable to process your request at this time.');
+                }
+
+            }else{
+                alert('Unable to process your request at this time.');
+            }
+
+        });
+
+    }
+
+
+    public unfollowUser(){
+
+       this.crudService.post(
+           'social/unfollow-user', 
+           {userId : this.profileData.main.userId}, 
+           true
+       ).subscribe((resp: any) => {
+            this.showActions.followUser = true;
+            this.showActions.unfollowUser = false;
+            this.showActions.undoFollowRequest = false;
+            this.showOpts = false;
+       }, err => {
+           console.error(err);
+       });
+
+
     }
 
 }
