@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import {HomePage} from './pages/home/home.page';
-import {ProfilePage} from './pages/profile/profile.page';
 import {EditProfilePage} from './pages/edit-profile/edit-profile.page';
 
 const routes: Routes = [
@@ -13,7 +12,7 @@ const routes: Routes = [
   }, 
   {
     path : 'profile/:username', 
-    component : ProfilePage
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
   }, 
   {
     path : 'edit-profile', 
@@ -22,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy : PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,0 +1,71 @@
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,.7);
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5;
+    padding:1rem;
+}
+
+.modal-main{
+    width:50rem;
+    position:relative;
+
+    &__close{
+        width:4.5rem;
+        position:absolute;
+        top:-5rem;
+        right:-.5rem;
+        cursor:pointer;
+    }
+
+    &__content{
+        padding:1rem;
+        background:#fff;
+        border-radius:.5rem;
+        overflow:hidden;
+    }
+}
+
+#newImgUpload{
+    display:none;
+}
+
+.uploadImgBox{
+    padding:2rem;
+    background:#ddd;
+    border:1px solid #ccc;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction:column;
+    cursor:pointer;
+
+    &__text{
+        font-size:2rem;
+        color:#888;
+    }
+}
+
+.add-image-icon{
+    width:4rem;
+}
+
+.or-text{
+    font-size:2rem;
+    text-align:center;
+    font-weight:bold;
+    margin:1rem 0;
+    user-select:none;
+}
+
+.loading-spinner{
+    display:block;
+    margin:auto;
+    width:8rem;
+}

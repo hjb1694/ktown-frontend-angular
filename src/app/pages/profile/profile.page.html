@@ -1,6 +1,6 @@
 <div class="container">
     <header class="header-bar">
-        <img src="../../../assets/ktown_portal_logo.png" class="logo"/>
+        <img routerLink="/" src="../../../assets/ktown_portal_logo.png" class="logo"/>
         <button class="menu-toggle" (click)="openSideMenu()">
             <img src="../../../assets/menu.svg" class="menu-toggle__icon"/>
             <span class="menu-toggle__text">Menu</span>
@@ -52,10 +52,18 @@
                         >
                             Undo Follow Request
                         </button>
-                        <button *ngIf="showActions.blockUser" class="btn-dropdown-opt">
+                        <button 
+                        *ngIf="showActions.blockUser" 
+                        class="btn-dropdown-opt"
+                        (click)="blockUser()"
+                        >
                             Block User
                         </button>
-                        <button *ngIf="showActions.unblockUser" class="btn-dropdown-opt">
+                        <button 
+                        *ngIf="showActions.unblockUser" 
+                        class="btn-dropdown-opt"
+                        (click)="unblockUser()"
+                        >
                             Unblock User
                         </button>
                         <button *ngIf="showActions.reportUser" class="btn-dropdown-opt">

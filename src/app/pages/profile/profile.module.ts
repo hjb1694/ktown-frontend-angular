@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {ProfilePage} from './profile.page';
 import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import {ProfilePageRoutingModule} from './profile-routing.module';
 
 
 @NgModule({
     imports : [
         CommonModule, 
-        RouterModule
+        ProfilePageRoutingModule
     ], 
     declarations : [
         ProfilePage

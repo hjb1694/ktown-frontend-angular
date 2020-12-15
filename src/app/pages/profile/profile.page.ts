@@ -1,10 +1,12 @@
-import { SelectorMatcher } from '@angular/compiler';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { EmailVerificationModalService } from 'src/app/global-components/email-verification-modal/email-verification-modal.service';
 import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CrudService } from 'src/app/services/crud.service';
+import { environment } from '../../../environments/environment';
+const {assetsUrl} = environment;
 
 
 @Component({
@@ -12,7 +14,7 @@ import { CrudService } from 'src/app/services/crud.service';
     templateUrl : './profile.page.html', 
     styleUrls : ['./profile.page.scss']
 })
-export class ProfilePage implements OnInit{
+export class ProfilePage implements OnInit, OnDestroy{
 
 
     public isLoading: any = {
@@ -49,6 +51,7 @@ export class ProfilePage implements OnInit{
     public showOpts: boolean = false;
     private loggedInUser: any;
     private loggedInUserRole: number;
+    private userSubscription: Subscription;
 
     constructor(
         private sideMenuService: SideMenuService, 
@@ -62,6 +65,7 @@ export class ProfilePage implements OnInit{
 
         this.route.params.subscribe((params: Params) => {
             this.fetchErrorMsg.main = null;
+            this.showOpts = false;
             this.userName = params['username']; 
 
             this.showActions = {
@@ -92,7 +96,11 @@ export class ProfilePage implements OnInit{
             }else{
 
                 this.showBadge = (this.profileData.main.role && this.profileData.main.role > 1);
-        
+                
+                if(this.profileData.main.profileImg){
+                     this.profileData.main.profileImg = `${assetsUrl}/public/uploads/profile-images/${this.profileData.main.profileImg}.png`;
+                }
+
                 this.listenForUser();
             }
 
@@ -115,7 +123,7 @@ export class ProfilePage implements OnInit{
 
     private listenForUser(){
 
-        this.authService.user.subscribe(user => {
+        this.userSubscription = this.authService.user.subscribe(user => {
 
            if(!user){
 
@@ -190,6 +198,7 @@ export class ProfilePage implements OnInit{
 
                 this.showAboutData = false;
                 this.profileMessages.showPrivate = true;
+                this.profileMessages.showOwnPrivate = false;
 
             }
 
@@ -353,6 +362,50 @@ export class ProfilePage implements OnInit{
        });
 
 
+    }
+
+    public blockUser() {
+
+        this.crudService.post(
+            'social/block-user', 
+            {userId : this.profileData.main.userId},
+            true
+        )
+        .subscribe((resp : any) => {
+            this.showActions.blockUser = false;
+            this.showActions.unblockUser = true;
+            this.showActions.followUser = false; 
+            this.showActions.unfollowUser = false;
+            this.showActions.undoFollowRequest = false;
+            this.showOpts = false;
+        }, err => {
+            console.error(err);
+        });
+
+    }
+
+    public unblockUser(){
+
+        this.crudService.post(
+            'social/unblock-user', 
+            {userId : this.profileData.main.userId}, 
+            true
+        )
+        .subscribe((resp: any) => {
+
+            this.showOpts = false;
+
+            this.determineActionDropdownContent();
+
+        }, err => {
+            console.error(err);
+        });
+
+    }
+
+    //On Destroy
+    ngOnDestroy(){
+        this.userSubscription.unsubscribe();
     }
 
 }

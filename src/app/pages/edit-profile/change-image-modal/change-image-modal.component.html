@@ -1,0 +1,47 @@
+<div class="modal">
+    <div class="modal-main">
+        <img 
+        *ngIf="showCloseBtn"
+        src="../../../../assets/cancel.svg" 
+        alt="close"
+        class="modal-main__close"
+        title="close"
+        (click)="closeModal()"
+        />
+        <div class="modal-main__content">
+            <img 
+            *ngIf="showLoading" 
+            class="loading-spinner"
+            src="../../../../assets/rolling-spinner-grey.gif" 
+            alt="Processing..."/>
+            <div *ngIf="showCropper" class="cropper">
+                <image-cropper
+                style="width:25rem; margin:auto;"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="4 / 3"
+                format="png"
+                [cropperStaticWidth]="100"
+                [cropperStaticHeight]="100"
+                [hideResizeSquares]="true"
+                [roundCropper]="true"
+                (imageLoaded)="imageLoaded()"
+                (imageCropped)="imageCropped($event)"
+                >
+                </image-cropper>
+                <button (click)="save()" class="btn btn--primary btn--block">Crop and Save</button>
+            </div>
+            <div class="img-selectors" *ngIf="showImageSelectors">
+                <label for="newImgUpload" class="uploadImgBox">
+                    <img class="add-image-icon" src="../../../../assets/add_photo.svg" alt="Add Photo">
+                    <p class="uploadImgBox__text">Upload Image</p>
+                    <input type="file" accept="image/*" 
+                    (change)="fileChange($event)" 
+                    id="newImgUpload"/>
+                </label>
+                <div class="or-text">OR</div>
+                <button class="btn btn--primary btn--block">Use Default Image</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.s
 export class EditProfilePage{
 
     public profileImg = '../../../assets/no-user.png';
+    public showImgEditModal: boolean = false;
 
     constructor(
         private sideMenuService: SideMenuService
@@ -18,6 +19,14 @@ export class EditProfilePage{
 
         this.sideMenuService.openSideMenu();
 
+    }
+
+    public closeModal(){
+        this.showImgEditModal = false;
+    }
+
+    public displayImgEditModal(){
+        this.showImgEditModal = true;
     }
 
 }
