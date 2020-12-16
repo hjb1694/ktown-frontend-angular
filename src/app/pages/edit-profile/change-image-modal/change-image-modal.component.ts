@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { AlertService } from 'src/app/global-components/alert/alert.service';
+import { LoginRegisterModalService } from 'src/app/global-components/login-register-modal/login-register-modal.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
@@ -10,6 +13,7 @@ import { CrudService } from 'src/app/services/crud.service';
 export class ChangeImageModalComponent{
 
     @Output() modalClose = new EventEmitter();
+    @Output() imageLoadSuccessful = new EventEmitter();
 
     public imageChangedEvent: any;
     public showImageSelectors: boolean = true;
@@ -18,9 +22,13 @@ export class ChangeImageModalComponent{
     public croppedImage: any;
     public showLoading: boolean = false;
     public showCloseBtn: boolean = true;
+    public isProcessingError: boolean = false;
 
     constructor(
-        private crudService: CrudService
+        private crudService: CrudService, 
+        private alertService: AlertService, 
+        private authService: AuthService, 
+        private loginRegisterModalService: LoginRegisterModalService
     ){}
 
     public fileChange(event: any): void {
@@ -37,6 +45,47 @@ export class ChangeImageModalComponent{
         this.croppedImage = event.base64;
     }
 
+    public checkResponseError(err: any) {
+
+        if(err.errors?.errorShortText){
+            switch(err.errors.errorShortText){
+                case 'INVALID_AUTH_TOKEN':
+                case 'ERR_NO_TOKEN':
+                case 'ERR_INVALID_TOKEN_FORMAT':
+                    this.loginRegisterModalService.showModal.next(true);
+                    this.authService.logout();
+                break;
+                case 'USER_DEACTIVATED':
+                    this.alertService.showAlert.next({
+                        color : 'red', 
+                        content : 'Your account has been deactivated.'
+                    });
+                    this.authService.logout();
+                break;
+                case 'ERR_USER_ACCT_FROZEN':
+                    this.alertService.showAlert.next({
+                        color : 'red', 
+                        content : 'Your account is frozen and under review by staff.'
+                    });
+                break;
+                default: 
+                    this.alertService.showAlert.next({
+                        color : 'red', 
+                        content : 'Unable to process your request at this time.'
+                    });
+            }
+        }else{
+            this.alertService.showAlert.next({
+                color : 'red', 
+                content : 'Unable to process your request at this time.'
+            });
+        }
+
+        this.isProcessingError = true;
+        this.showCloseBtn = true;
+
+    }
+
     public save(){
         this.showCropper = false;
         this.showLoading = true;
@@ -48,11 +97,14 @@ export class ChangeImageModalComponent{
             true
         )
         .subscribe((resp: any) => {
-
-            console.log(resp);
+            this.imageLoadSuccessful.emit(true);
+            this.alertService.showAlert.next({
+                color : 'green', 
+                content : 'Profile image was successfully updated!'
+            });
 
         }, err => {
-            console.error(err);
+            this.checkResponseError(err);
         });
     }
 

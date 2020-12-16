@@ -16,6 +16,7 @@
 
 .main-area{
     padding:1.5rem;
+    min-height:50rem;
 }
 
 .edit-profile-img-area{
@@ -38,4 +39,21 @@
 .edit-profile-form{
     max-width:50rem;
     margin:auto;
+}
+
+.main-loading-spinner{
+    display:block;
+    margin:4rem auto;
+}
+
+.page-error-message{
+    background:#eee;
+    border:1px solid #888;
+    border-radius:.5rem;
+    color:#888;
+    font-size:1.8rem;
+    padding:2rem;
+    margin:2rem auto;
+    width:80%;
+    text-align:center;
 }

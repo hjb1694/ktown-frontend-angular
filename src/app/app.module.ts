@@ -12,12 +12,14 @@ import {EditProfilePageModule} from './pages/edit-profile/edit-profile.module';
 import {SideMenuModule} from './global-components/side-menu/side-menu.module';
 import {LoginRegisterModalModule} from './global-components/login-register-modal/login-register-modal.module';
 import {EmailVerificationModalModule} from './global-components/email-verification-modal/email-verification-modal.module';
+import {AlertComponent} from './global-components/alert/alert.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, 
+    AlertComponent
   ],
   imports: [
     BrowserModule,

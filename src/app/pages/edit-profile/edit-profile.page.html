@@ -8,33 +8,65 @@
     </header>
     <app-change-image-modal 
     *ngIf="showImgEditModal" 
-    (modalClose)="closeModal()">
+    (modalClose)="closeModal()"
+    (imageLoadSuccessful)="imageLoadSuccessful()"
+    >
     </app-change-image-modal>
     <div class="main-area">
-        <h1 class="page-heading">Edit Profile</h1>
-        <div class="edit-profile-img-area">
-            <img [src]="profileImg" class="profile-img" alt="Profile Image">
-            <button (click)="displayImgEditModal()" class="btn btn--primary edit-profile-img-btn">
-                <img src="../../../assets/create.svg" alt="Edit Profile Image"/>
-                Change Profile Image
-            </button>
+        <img 
+        *ngIf="isLoading"
+        class="main-loading-spinner" 
+        src="../../../assets/rolling-spinner-grey.gif" 
+        alt="Loading..."
+        />
+        <div 
+        *ngIf="isLoadError"
+        class="page-error-message"
+        >
+            There was an issue loading this page.
         </div>
-        <form class="edit-profile-form">
-            <div class="form-group">
-                <label for="bio" class="label">Bio</label>
-                <textarea class="text-area"></textarea>
+        <ng-container *ngIf="!isLoading && !isLoadError">
+            <h1 class="page-heading">Edit Profile</h1>
+            <div class="edit-profile-img-area">
+                <img [src]="profileImg" class="profile-img" alt="Profile Image">
+                <button (click)="displayImgEditModal()" class="btn btn--primary edit-profile-img-btn">
+                    <img src="../../../assets/create.svg" alt="Edit Profile Image"/>
+                    Change Profile Image
+                </button>
             </div>
-            <div class="form-group">
-                <label for="occupation" class="label">Occupation</label>
-                <input type="text" id="occupation" class="text-input"/>
-            </div>
-            <div class="form-group">
-                <label for="location" class="label">Location</label>
-                <input type="text" id="location" class="text-input"/>
-            </div>
-            <div class="form-group">
-                <button class="btn btn--primary btn--block">Save</button>
-            </div>
-        </form>
+            <form 
+            [formGroup]="aboutForm" 
+            (ngSubmit)="submitAboutForm()" 
+            class="edit-profile-form"
+            >
+                <div class="form-group">
+                    <label for="bio" class="label">Bio</label>
+                    <textarea class="text-area" [value]="profileData?.bio"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="occupation" class="label">Occupation</label>
+                    <input 
+                    type="text" 
+                    id="occupation" 
+                    class="text-input"
+                    [value]="profileData?.occupation"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="location" class="label">Location</label>
+                    <input 
+                    type="text" 
+                    id="location" 
+                    class="text-input"
+                    [value]="profileData?.location"
+                    />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn--primary btn--block">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </ng-container>
     </div>
 </div>

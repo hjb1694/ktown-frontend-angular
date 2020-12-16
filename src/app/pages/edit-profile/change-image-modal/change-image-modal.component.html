@@ -14,6 +14,9 @@
             class="loading-spinner"
             src="../../../../assets/rolling-spinner-grey.gif" 
             alt="Processing..."/>
+            <div *ngIf="isProcessingError" class="processing-error">
+                This action could not be completed at this time.
+            </div>
             <div *ngIf="showCropper" class="cropper">
                 <image-cropper
                 style="width:25rem; margin:auto;"

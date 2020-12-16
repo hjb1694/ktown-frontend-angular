@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/global-components/alert/alert.service';
 import { EmailVerificationModalService } from 'src/app/global-components/email-verification-modal/email-verification-modal.service';
 import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -58,7 +59,8 @@ export class ProfilePage implements OnInit, OnDestroy{
         private route: ActivatedRoute, 
         private authService: AuthService, 
         private crudService: CrudService, 
-        private emailVerificationModalService : EmailVerificationModalService
+        private emailVerificationModalService : EmailVerificationModalService, 
+        private alertService: AlertService
     ){}
 
     ngOnInit(){
@@ -304,10 +306,16 @@ export class ProfilePage implements OnInit, OnDestroy{
         .subscribe((resp: any) => {
 
             if(resp.body?.shortMsg === 'PENDING'){
-                alert('A follow request has been sent and is pending acceptance!');
+                this.alertService.showAlert.next({
+                    color : 'green', 
+                    content : 'A follow request has been sent and is pending acceptance!'
+                });
                 this.showActions.undoFollowRequest = true;
             }else if(resp.body?.shortMsg === 'FOLLOWING'){
-                alert('You are now following this user!');
+                this.alertService.showAlert.next({
+                    color : 'green', 
+                    content : 'You are now following this user!'
+                });
                 this.showActions.unfollowUser = true;
             }
 
@@ -323,22 +331,37 @@ export class ProfilePage implements OnInit, OnDestroy{
                         this.emailVerificationModalService.showModal.next(true);
                     break;
                     case 'ERR_USER_ACCT_FROZEN':
-                        alert('You account is frozen an is under review by staff.');
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'Your account is frozen and under review by staff.'
+                        });
                     break;
                     case 'ERR_BLOCK':
-                        alert('You have either blocked this user or are blocked by this user.');
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'You have either blocked this user or are blocked by this user.'
+                        });
                         this.showActions.followUser = false; 
                         this.showActions.unfollowUser = false;
                     break;
                     case 'ERR_ALREADY_FOLLOWING':
-                        alert('You are already following this user!');
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'You are already following this user!'
+                        });
                     break;
                     default:
-                        alert('Unable to process your request at this time.');
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'Unable to process your request at this time.'
+                        });
                 }
 
             }else{
-                alert('Unable to process your request at this time.');
+                this.alertService.showAlert.next({
+                    color : 'red', 
+                    content : 'Unable to process your request at this time.'
+                });
             }
 
         });
