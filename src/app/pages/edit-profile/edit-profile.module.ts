@@ -8,6 +8,7 @@ import {EditProfilePage} from './edit-profile.page';
 import {ChangeImageModalComponent} from './change-image-modal/change-image-modal.component';
 
 import {ImageCropperModule} from 'ngx-image-cropper';
+import { EditProfileRoutingModule } from './edit-profile-routing.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {ImageCropperModule} from 'ngx-image-cropper';
         CommonModule, 
         RouterModule, 
         ImageCropperModule, 
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        EditProfileRoutingModule
     ], 
     declarations : [
         EditProfilePage, 

@@ -41,16 +41,25 @@
             >
                 <div class="form-group">
                     <label for="bio" class="label">Bio</label>
-                    <textarea class="text-area" [value]="profileData?.bio"></textarea>
+                    <textarea 
+                    class="text-area"
+                    formControlName="bio"
+                    maxlength="5000"
+                    ></textarea>
                 </div>
                 <div class="form-group">
                     <label for="occupation" class="label">Occupation</label>
-                    <input 
-                    type="text" 
-                    id="occupation" 
-                    class="text-input"
-                    [value]="profileData?.occupation"
-                    />
+                    <select 
+                    class="select-input"
+                    id="occupation"
+                    formControlName="occupation"
+                    >
+                        <option value="">--SELECT--</option>
+                        <option 
+                        *ngFor="let occ of occupations"
+                        [value]="occ"
+                        >{{ occ }}</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="location" class="label">Location</label>
@@ -58,11 +67,11 @@
                     type="text" 
                     id="location" 
                     class="text-input"
-                    [value]="profileData?.location"
+                    formControlName="location"
                     />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn--primary btn--block">
+                    <button type="submit" class="btn btn--primary btn--block">
                         Save Changes
                     </button>
                 </div>

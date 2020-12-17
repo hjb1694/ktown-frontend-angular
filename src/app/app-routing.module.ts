@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import {HomePage} from './pages/home/home.page';
-import {EditProfilePage} from './pages/edit-profile/edit-profile.page';
+import { DenyIfNotAuth } from './route-guards/denyIfNotAuth.guard';
 
 const routes: Routes = [
   {
@@ -16,7 +16,8 @@ const routes: Routes = [
   }, 
   {
     path : 'edit-profile', 
-    component : EditProfilePage
+    canActivate : [DenyIfNotAuth],
+    loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
   }
 ];
 
