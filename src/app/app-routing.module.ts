@@ -18,6 +18,14 @@ const routes: Routes = [
     path : 'edit-profile', 
     canActivate : [DenyIfNotAuth],
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
+  }, 
+  {
+    path : 'discussions/add', 
+    loadChildren : () => import('./pages/add-discussion-thread/add-discussion-thread.module').then(m => m.AddDiscussionThreadPageModule)
+  },
+  {
+    path : '**', 
+    redirectTo : ''
   }
 ];
 

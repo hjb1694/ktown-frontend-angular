@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import {AutoLogoutWarningComponent} from './global-components/auto-logout-warnin
 
 import { HttpClientModule } from '@angular/common/http';
 
+import {QuillModule} from 'ngx-quill';
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -32,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     SideMenuModule,
     LoginRegisterModalModule, 
     EmailVerificationModalModule,
-    HttpClientModule
+    HttpClientModule,
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

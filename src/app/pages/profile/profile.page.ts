@@ -1,8 +1,10 @@
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/global-components/alert/alert.service';
 import { EmailVerificationModalService } from 'src/app/global-components/email-verification-modal/email-verification-modal.service';
+import { LoginRegisterModalService } from 'src/app/global-components/login-register-modal/login-register-modal.service';
 import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CrudService } from 'src/app/services/crud.service';
@@ -60,7 +62,8 @@ export class ProfilePage implements OnInit, OnDestroy{
         private authService: AuthService, 
         private crudService: CrudService, 
         private emailVerificationModalService : EmailVerificationModalService, 
-        private alertService: AlertService
+        private alertService: AlertService, 
+        private loginRegisterModalService: LoginRegisterModalService
     ){}
 
     ngOnInit(){
@@ -143,7 +146,6 @@ export class ProfilePage implements OnInit, OnDestroy{
            }else{
                 this.loggedInUser = user;
 
-                this.fetchProfileAboutDataWithAuth();
                 this.fetchLoggedInUserRole();
 
            }
@@ -159,8 +161,25 @@ export class ProfilePage implements OnInit, OnDestroy{
             console.log(resp.body);
             this.loggedInUserRole = resp.body;
             this.determineActionDropdownContent();  
+            this.fetchProfileAboutDataWithAuth();
         }, err => {
-            console.error(err);
+
+            this.profileMessages.showPrivate = this.profileData.main.isPrivateProfile;
+            this.showAboutData = false;
+            
+            if(err.error?.errorShortText){
+
+                switch(err.error.errorShortText){
+                    case 'INVALID_AUTH_TOKEN':
+                    case 'ERR_NO_TOKEN':
+                    case 'ERR_INVALID_TOKEN_FORMAT':
+                        this.authService.logout(false);
+                    break;
+
+                }
+
+            }
+
         });
     }
 
@@ -205,7 +224,7 @@ export class ProfilePage implements OnInit, OnDestroy{
             }
 
         }, err => {
-            console.error(err);
+           console.error(err);
         });
 
     }
@@ -327,6 +346,12 @@ export class ProfilePage implements OnInit, OnDestroy{
             if(err.error?.errorShortText){
 
                 switch(err.error.errorShortText){
+                    case 'INVALID_AUTH_TOKEN':
+                    case 'ERR_NO_TOKEN':
+                    case 'ERR_INVALID_TOKEN_FORMAT':
+                        this.authService.logout(false);
+                        this.loginRegisterModalService.showModal.next(true);
+                    break;
                     case 'ERR_NOT_VERIFIED':
                         this.emailVerificationModalService.showModal.next(true);
                     break;
@@ -382,6 +407,27 @@ export class ProfilePage implements OnInit, OnDestroy{
             this.showOpts = false;
        }, err => {
            console.error(err);
+           if(err.error?.errorShortText){
+                switch(err.error?.errorShortText){
+                    case 'INVALID_AUTH_TOKEN':
+                    case 'ERR_NO_TOKEN':
+                    case 'ERR_INVALID_TOKEN_FORMAT':
+                        this.authService.logout(false);
+                        this.loginRegisterModalService.showModal.next(true);
+                    break;
+                    default:
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'Unable to process your request at this time.'
+                        });
+                }
+
+           }else{
+                this.alertService.showAlert.next({
+                    color : 'red', 
+                    content : 'Unable to process your request at this time.'
+                });
+           }
        });
 
 

@@ -73,12 +73,12 @@ export class AuthService{
 
     }
 
-    public logout(): void{
+    public logout(redirect: boolean = true): void{
         this.user.next(null);
         sessionStorage.clear();
         clearInterval(this.logoutWarningInterval);
         this.autoLogoutWarningService.showModal.next(false);
-        this.router.navigateByUrl('/');
+        redirect && this.router.navigateByUrl('/');
     }
 
     public autoLogin(): void{
@@ -122,7 +122,7 @@ export class AuthService{
 
         return this.http.post(`${apiUrl}/auth/refresh-login`, {}, {
             headers : { 
-                'authorization' : this.user.getValue().token
+                'authorization' : `Bearer ${this.user.getValue().token}`
             }
         }).pipe(
             catchError(err => {
