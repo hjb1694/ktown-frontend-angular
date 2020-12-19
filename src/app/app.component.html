@@ -2,4 +2,6 @@
 <app-side-menu></app-side-menu>
 <app-login-register-modal></app-login-register-modal>
 <app-email-verification-modal></app-email-verification-modal>
+<app-auto-logout-warning *ngIf="showLogoutWarning"></app-auto-logout-warning>
+
 <router-outlet></router-outlet>

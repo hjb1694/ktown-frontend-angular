@@ -142,6 +142,7 @@
     font-size:1.8rem;
     margin-top:1rem;
     color:#222;
+    user-select:none;
 }
 
 .occupation, .location{
@@ -160,11 +161,13 @@
     width:max-content;
     transform:rotate(-6deg) skew(-10deg);
     background:linear-gradient(to bottom, transparent 50%,#ece1c2 50%);
+    user-select:none;
 }
 
 .occupation, .location{
     margin-top:1rem;
     font-size:2.5rem;
+    user-select:none;
 }
 
 .fetchErrorBox{
@@ -192,6 +195,7 @@
     margin:2rem auto;
     width:80%;
     text-align:center;
+    user-select:none;
 }
 
 .nobio, .not-specified{

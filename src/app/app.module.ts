@@ -13,13 +13,15 @@ import {SideMenuModule} from './global-components/side-menu/side-menu.module';
 import {LoginRegisterModalModule} from './global-components/login-register-modal/login-register-modal.module';
 import {EmailVerificationModalModule} from './global-components/email-verification-modal/email-verification-modal.module';
 import {AlertComponent} from './global-components/alert/alert.component';
+import {AutoLogoutWarningComponent} from './global-components/auto-logout-warning/auto-logout-warning.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    AlertComponent
+    AlertComponent, 
+    AutoLogoutWarningComponent
   ],
   imports: [
     BrowserModule,

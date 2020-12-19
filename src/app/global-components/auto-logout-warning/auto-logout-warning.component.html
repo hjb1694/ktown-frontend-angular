@@ -1,0 +1,19 @@
+<div class="modal">
+    <div class="modal-main">
+        <h1 class="modal-heading">Notice</h1>
+        <div class="modal-content">
+            <p class="modal-message">You are about to be <strong>logged out</strong> in less than 5 minutes.</p>
+        </div>
+        <div class="modal-action-buttons">
+            <button 
+            (click)="refreshLogin()" 
+            class="modal-action-button modal-action-button__stay-login"
+            >
+                Stay Logged In
+            </button>
+            <button (click)="closeModal()" class="modal-action-button modal-action-button__close">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
