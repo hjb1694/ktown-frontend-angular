@@ -11,11 +11,11 @@ const routes: Routes = [
     component : HomePage
   }, 
   {
-    path : 'profile/:username', 
+    path : 'profile/user/:username', 
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
   }, 
   {
-    path : 'edit-profile', 
+    path : 'profile/edit', 
     canActivate : [DenyIfNotAuth],
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
   }, 

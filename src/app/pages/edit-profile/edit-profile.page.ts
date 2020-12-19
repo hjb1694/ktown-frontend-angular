@@ -138,7 +138,7 @@ export class EditProfilePage implements OnInit{
                 content : 'Your profile has been successfully updated!'
             });
 
-            this.router.navigate(['/profile', this.authService.user.getValue().username]);
+            this.router.navigate(['/profile/user', this.authService.user.getValue().username]);
 
         }, err => {
             console.error(err);

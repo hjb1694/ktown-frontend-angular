@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
 @import '~quill/dist/quill.snow.css';
@@ -100,10 +101,12 @@ select{
     font-family:inherit;
     border-radius:.5rem;
     font-weight:200;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .text-area{
-    height:15rem;
+    height:20rem;
     resize:none;
 }
 

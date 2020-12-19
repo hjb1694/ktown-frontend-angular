@@ -37,6 +37,11 @@ export class SideMenuComponent implements OnInit, AfterViewInit{
             img : '', 
             link : '#'
         },
+        {
+            title : 'Guides', 
+            img : '', 
+            link : '#'
+        }
     ];
     @ViewChild('sideMenu') sideMenu: ElementRef;
     @ViewChild('sideMenuMain') sideMenuMain: ElementRef;
@@ -73,7 +78,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit{
     }
 
     public goToProfile(){
-        this.router.navigate(['/profile', this.authService.user.getValue().username]);
+        this.router.navigate(['/profile/user', this.authService.user.getValue().username]);
         this.sideMenuService.closeSideMenu();
     }
 }

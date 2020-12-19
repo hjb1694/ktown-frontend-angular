@@ -11,7 +11,7 @@
     height:15rem;
     position:relative;
     box-shadow:0 0 1rem rgba(0,0,0,.24);
-    background: url(../../../assets/default_profile_banner.jpg) center / cover;
+    background: url(../../../assets/banner-2.jpg) center / cover;
 }
 
 .spinner{
@@ -71,7 +71,7 @@
 .profile-action-btn{
     display:flex;
     align-items:center;
-    background:rgb(50, 150, 95);
+    background:linear-gradient(to bottom right, #265386, #5589c5);
     color:#fff;
     padding:1rem;
     font-size:1.8rem;
@@ -81,6 +81,8 @@
     position:absolute;
     right:0;
     top:0;
+    font-family:inherit;
+    font-weight:normal;
 }
 
 .btn-dropdown-opts{
@@ -91,6 +93,8 @@
     top:4.5rem;
     z-index:3;
     box-shadow: 0 0 1rem rgba(0,0,0,.24);
+    overflow:hidden;
+    border-radius:.5rem 0 0 .5rem;
     overflow:hidden;
 }
 
@@ -105,7 +109,7 @@
     align-items: center;
 
     &:hover{
-        background:#eee;
+        background:#e8f4ff;
     }
 }
 

@@ -4,10 +4,16 @@
     border-bottom:1px solid #ccc;
     font-size:2rem;
     padding:1.5rem;
-    color:#666;
+    color:#000;
     text-decoration: none;
     transition:.3s background;
     cursor:pointer;
+    background:rgba(255,255,255,.6);
+    backdrop-filter: blur(10px);
+    margin:1px 0;
+    border-radius:.5rem;
+    font-family: 'Open Sans', sans-serif;
+
 }
 
 .nav__link-img{
@@ -22,9 +28,6 @@
 
 }
 
-.nav__link:hover{
-    background:#f2f2f2;
-}
 
 .nav__link:hover > .nav__link-img{
     transform:scale(1.05);

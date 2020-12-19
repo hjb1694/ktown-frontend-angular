@@ -9,8 +9,27 @@ import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.s
 export class AddDiscussionThreadPage{
 
     editorStyles = {
-        height : '200px'
+        height : '35rem'
     }
+    public topics = [
+        'New to Knoxville', 
+        'Tourism', 
+        'Campus Life', 
+        'Community + Social', 
+        'Lifestyle', 
+        'Recipes + Cooking', 
+        'Style + Trends', 
+        'Art + Music', 
+        'Dating Scene', 
+        'Outdoors', 
+        'Prospective Residents', 
+        'Activities + Events', 
+        'Politics', 
+        'Local Sports', 
+        'Religion + Church', 
+        'Career + Education', 
+        'General'
+    ]
 
     constructor(
         private sideMenuService: SideMenuService

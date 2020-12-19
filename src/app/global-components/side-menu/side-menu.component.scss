@@ -1,10 +1,10 @@
 .side-menu{
-    background:rgba(0,0,0,.7);
+    background:rgba(0,0,0,.5);
     position:fixed;
     left:0;
     top:0;
     width:0;
-    height:100vh;
+    height:max-content;
     z-index:10;
 }
 
@@ -18,14 +18,18 @@
     overflow-x:hidden;
     white-space:nowrap;
     height:100vh;
-    background:#fff;
+    background:transparent;
     overflow-y:auto;
     opacity:0;
     transition:.3s all ease-in-out;
+    background:rgba(255,255,255,.4);
+    padding:.8rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 .side-menu.show > .side-menu__main {
-    width:28rem;
+    width:25rem;
     opacity:1;
 }
 
@@ -33,6 +37,10 @@
     display:flex;
     align-items:center;
     padding:1.5rem 1rem;
+    background:rgba(255,255,255,.7);
+    backdrop-filter: blur(8px);
+    margin:.5rem 0;
+    border-radius:.5rem;
 }
 
 .profile-img-area__img{
@@ -42,27 +50,36 @@
     border-radius:90%;
     object-fit: cover;
     object-position:center;
+    border:2px solid #fff;
 }
 
 .profile-img-area__username{
     font-size:2rem;
-    color:#666;
+    user-select:none;
 }
 
 .user-area{
-    border-bottom:1px solid #ccc;
-    border-top:1px solid #ccc;
-    background:#a39d7d;
+    overflow:hidden;
+    border-radius:.5rem;
+    margin-bottom:.5rem;
 
     &__link{
         display:block;
         font-size:1.8rem;
         padding:1rem 1.5rem;
-        color:#fff;
+        color:#000;
         cursor:pointer;
+        margin-bottom:1px;
+        background:rgba(255,255,255,.7);
+        backdrop-filter: blur(8px);
+        transition:background .3s;
 
-        &:not(:last-child){
-            border-bottom:1px solid #fff;
+        &:hover{
+            background:rgba(255,255,255,.9);
+        }
+
+        &:hover > span {
+            transform: translate(3px);
         }
     }
 }
