@@ -1,6 +1,7 @@
-import {ValidationErrors, AbstractControl} from '@angular/forms';
+import {ValidationErrors, AbstractControl, ValidatorFn} from '@angular/forms';
 import isEmail from 'is-email';
 import stringLength from 'string-length';
+import Helpers from '../helpers';
 
 export class CustomValidators{
 
@@ -37,6 +38,33 @@ export class CustomValidators{
         }
 
         return null;
+
+    }
+
+
+    static minLength(
+        min: number, 
+        absoluteLen: boolean = true, 
+    ): ValidatorFn{
+
+        return (control: AbstractControl): ValidationErrors => {
+
+            if(absoluteLen){
+
+                console.log('Absolute String Length ', Helpers.absoluteStringLength(control.value));
+
+                if(Helpers.absoluteStringLength(control.value) < min)
+                    return {isMinLength : false};
+
+            }else{
+
+                if(Helpers.stringLengthNoExcessWhitespace(control.value) < min)
+                    return {isMinLength : false};
+
+            }
+
+            return null;
+        }
 
     }
 

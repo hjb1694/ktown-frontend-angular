@@ -7,14 +7,29 @@
         </button>
     </header>
     <div class="main-area">
-        <form class="new-thread-form" autocomplete="off">
+        <form 
+        *ngIf="showForm"
+        [formGroup]="addDiscussionForm"
+        (ngSubmit)="displayPreview()"
+        class="new-thread-form" 
+        autocomplete="off"
+        >
             <div class="form-group">
                 <label for="headline" class="label">Headline/Question</label>
-                <input type="text" id="headline" class="text-input"/>
+                <input 
+                type="text" 
+                id="headline" 
+                class="text-input"
+                formControlName="headline"
+                />
             </div>
             <div class="form-group">
                 <label for="topic" class="label">Topic</label>
-                <select id="topic" class="select-input">
+                <select 
+                id="topic" 
+                class="select-input"
+                formControlName="topic"
+                >
                     <option value="">-- SELECT --</option>
                     <option *ngFor="let topic of topics">{{ topic }}</option>
                 </select>
@@ -22,17 +37,23 @@
             <div class="form-group">
                 <label class="label">Details</label>
                 <quill-editor 
+                #editor
                 [styles]="editorStyles"
                 placeholder="Write something interesting..."
+                formControlName="details"
                 >
                 </quill-editor>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn--primary btn--block">
-                    Submit
+                <button type="submit" #subbut class="btn btn--primary btn--block">
+                    Preview
                 </button>
             </div>
         </form>
+        <div class="preview" *ngIf="showPreview">
+            <quill-view-html [content]="addDiscussionForm.get('details').value"></quill-view-html>
+            <button class="btn btn--primary btn--block">Submit</button>
+        </div>
     </div>
 </div>
 <!-- <quill-editor [styles]="editorStyles"></quill-editor> -->

@@ -22,7 +22,7 @@
     overflow-y:auto;
     opacity:0;
     transition:.3s all ease-in-out;
-    background:rgba(255,255,255,.4);
+    background:rgba(255,255,255,.5);
     padding:.8rem;
     backdrop-filter: blur(8px);
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -37,7 +37,7 @@
     display:flex;
     align-items:center;
     padding:1.5rem 1rem;
-    background:rgba(255,255,255,.7);
+    background:rgba(255,255,255,.5);
     backdrop-filter: blur(8px);
     margin:.5rem 0;
     border-radius:.5rem;
@@ -70,7 +70,7 @@
         color:#000;
         cursor:pointer;
         margin-bottom:1px;
-        background:rgba(255,255,255,.7);
+        background:rgba(255,255,255,.5);
         backdrop-filter: blur(8px);
         transition:background .3s;
 
