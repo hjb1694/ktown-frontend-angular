@@ -51,15 +51,13 @@ export class CustomValidators{
 
             if(absoluteLen){
 
-                console.log('Absolute String Length ', Helpers.absoluteStringLength(control.value));
-
                 if(Helpers.absoluteStringLength(control.value) < min)
-                    return {isMinLength : false};
+                    return {minLenError : true};
 
             }else{
 
                 if(Helpers.stringLengthNoExcessWhitespace(control.value) < min)
-                    return {isMinLength : false};
+                    return {minLenError : true};
 
             }
 
@@ -67,6 +65,7 @@ export class CustomValidators{
         }
 
     }
+
 
 
 }
