@@ -40,9 +40,9 @@ export class CanAddNewThread implements CanActivate{
             return true;
         }).catch(err => {
             console.error(err);
-            if(err.error?.errShortText){
+            if(err.error?.errorShortText){
 
-                switch(err.error.shortText){
+                switch(err.error.errorShortText){
                     case 'INVALID_AUTH_TOKEN':
                     case 'ERR_NO_TOKEN':
                     case 'ERR_INVALID_TOKEN_FORMAT':

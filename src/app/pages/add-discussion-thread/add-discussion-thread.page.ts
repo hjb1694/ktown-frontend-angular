@@ -4,6 +4,11 @@ import { SideMenuService } from 'src/app/global-components/side-menu/side-menu.s
 import { CustomValidators } from '../../custom-validators/text-validators';
 import DiscussionsValidators from '../../custom-validators/discussions-validators';
 import { CrudService } from 'src/app/services/crud.service';
+import { AlertService } from "src/app/global-components/alert/alert.service";
+import { AuthService } from "src/app/services/auth.service";
+import { LoginRegisterModalService } from "src/app/global-components/login-register-modal/login-register-modal.service";
+import { EmailVerificationModalService } from "src/app/global-components/email-verification-modal/email-verification-modal.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector : 'app-add-discussion-thread', 
@@ -28,7 +33,12 @@ export class AddDiscussionThreadPage implements OnInit{
 
     constructor(
         private sideMenuService: SideMenuService, 
-        private crudService: CrudService
+        private crudService: CrudService, 
+        private alertService: AlertService, 
+        private authService: AuthService, 
+        private loginRegisterModalService: LoginRegisterModalService, 
+        private emailVerificationModalService: EmailVerificationModalService, 
+        private router: Router
     ){}
 
     ngOnInit(){
@@ -87,11 +97,58 @@ export class AddDiscussionThreadPage implements OnInit{
             'discussions/discussion-thread', 
             this.addDiscussionForm.value, 
             true
-        ).subscribe((resp: any) => {
+        ).toPromise()
+        .then(() => {
 
-        }, err => {
-            console.error(err);
-        }).add(() => {
+        })
+        .catch(err => {
+            if(err.error?.errorShortText){
+
+                switch(err.error.errorShortText){
+                    case 'INVALID_AUTH_TOKEN':
+                    case 'ERR_NO_TOKEN':
+                    case 'ERR_INVALID_TOKEN_FORMAT':
+                        this.loginRegisterModalService.showModal.next(true);
+                        this.authService.user.next(null);
+                    break;
+                    case 'ERR_NOT_VERIFIED':
+                        this.emailVerificationModalService.showModal.next(true);
+                    break;
+                    case 'USER_DEACTIVATED':
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'No longer a registered user'
+                        });
+                        this.authService.user.next(null);
+                        this.router.navigate(['/']);
+                    break;
+                    case 'ERR_USER_ACCT_FROZEN':
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'Your account is frozen and under review by admins.'
+                        });
+                    break;
+                    case 'ERR_MAX_THREADS_MET':
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'You have reached your maximum amount of threads for today.'
+                        });
+                    break;
+                    default:
+                        this.alertService.showAlert.next({
+                            color : 'red', 
+                            content : 'There was an issue processing your request!'
+                        });
+                }
+
+            }else{
+                this.alertService.showAlert.next({
+                    color : 'red', 
+                    content : 'There was an issue processing your request!'
+                });
+            }
+        })
+        .finally(() => {
             this.formSubmissionIsProcessing = false;
         });
 
