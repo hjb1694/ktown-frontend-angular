@@ -83,6 +83,18 @@ export class AddDiscussionThreadPage implements OnInit{
     public submitThread(){
         this.formSubmissionIsProcessing = true;
 
+        this.crudService.post(
+            'discussions/discussion-thread', 
+            this.addDiscussionForm.value, 
+            true
+        ).subscribe((resp: any) => {
+
+        }, err => {
+            console.error(err);
+        }).add(() => {
+            this.formSubmissionIsProcessing = false;
+        });
+
 
     }
 
@@ -90,7 +102,7 @@ export class AddDiscussionThreadPage implements OnInit{
 
         const currentHTML = this.addDiscussionForm.get('details').value;
 
-        let newHTML = currentHTML.replace(/<p><br><\/p>/g, '\n');
+        let newHTML = currentHTML.replace(/<p><br \/><\/p>/g, '\n');
         newHTML = newHTML.replace(/\n{3,}/g, '\n\n');
 
         console.log('newHTML: ', newHTML);

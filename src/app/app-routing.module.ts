@@ -3,6 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import {HomePage} from './pages/home/home.page';
 import { DenyIfNotAuth } from './route-guards/denyIfNotAuth.guard';
+import { CanAddNewThread } from './route-guards/discussions/canAddNewThread';
 
 const routes: Routes = [
   {
@@ -20,8 +21,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
   }, 
   {
-    path : 'discussions/add', 
-    loadChildren : () => import('./pages/add-discussion-thread/add-discussion-thread.module').then(m => m.AddDiscussionThreadPageModule)
+    path : 'discussions/add',
+    canActivate : [CanAddNewThread], 
+    loadChildren: () => import('./pages/add-discussion-thread/add-discussion-thread.module').then(m => m.AddDiscussionThreadPageModule)
+  },
+  {
+    path : 'discussions', 
+    loadChildren: () => import('./pages/discussions-home/discussions-home.module').then(m => m.DiscussionsHomePageModule), 
   },
   {
     path : '**', 

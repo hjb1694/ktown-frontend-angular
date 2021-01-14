@@ -15,7 +15,7 @@ export class SideMenuComponent implements OnInit, AfterViewInit{
         {
             title : 'Discussions', 
             img : '', 
-            link : '#'
+            link : '/discussions'
         },
         {
             title : 'Dining', 

@@ -1,11 +1,31 @@
 .side-menu{
-    background:rgba(0,0,0,.5);
     position:fixed;
+    background:rgba(0,0,0,.4);
     left:0;
     top:0;
     width:0;
     height:max-content;
     z-index:10;
+
+    &__main{
+        width:0;
+        overflow-x:hidden;
+        white-space:nowrap;
+        height:100vh;
+        background:transparent;
+        overflow-y:auto;
+        opacity:0;
+        transition:.3s all ease-in-out;
+        background:#fff;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+
+    &__content{
+        background:#f4f4f4;
+        padding:1rem;
+        min-height:90%;
+    }
 }
 
 .side-menu.show{
@@ -13,20 +33,6 @@
     width:100%;
 }
 
-.side-menu__main{
-    width:0;
-    overflow-x:hidden;
-    white-space:nowrap;
-    height:100vh;
-    background:transparent;
-    overflow-y:auto;
-    opacity:0;
-    transition:.3s all ease-in-out;
-    background:rgba(255,255,255,.5);
-    padding:.8rem;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-}
 
 .side-menu.show > .side-menu__main {
     width:25rem;
@@ -37,10 +43,9 @@
     display:flex;
     align-items:center;
     padding:1.5rem 1rem;
-    background:rgba(255,255,255,.5);
-    backdrop-filter: blur(8px);
-    margin:.5rem 0;
-    border-radius:.5rem;
+    background:#fff;
+    margin-bottom:1rem;
+    padding:.8rem;
 }
 
 .profile-img-area__img{
@@ -60,8 +65,8 @@
 
 .user-area{
     overflow:hidden;
-    border-radius:.5rem;
-    margin-bottom:.5rem;
+    margin-bottom:1rem;
+    box-shadow:0 0 .5rem rgba(0,0,0,.4);
 
     &__link{
         display:block;
@@ -69,9 +74,8 @@
         padding:1rem 1.5rem;
         color:#000;
         cursor:pointer;
-        margin-bottom:1px;
-        background:rgba(255,255,255,.5);
-        backdrop-filter: blur(8px);
+        border-bottom:1px solid #ccc;
+        background:#fff;
         transition:background .3s;
 
         &:hover{
@@ -82,4 +86,8 @@
             transform: translate(3px);
         }
     }
+}
+
+.nav{
+    box-shadow:0 0 .5rem rgba(0,0,0,.4);
 }

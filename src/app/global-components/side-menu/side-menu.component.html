@@ -5,21 +5,23 @@
             <span *ngIf="!user" class="profile-img-area__username">Welcome</span>
             <span *ngIf="user" class="profile-img-area__username">{{ user.username }}</span>
         </div>
-        <app-auth-btns *ngIf="!user"></app-auth-btns>
-        <div *ngIf="user" class="user-area">
-            <a (click)="goToProfile()" class="user-area__link">View Profile</a>
-            <a class="user-area__link">Notifications</a>
-            <a class="user-area__link">Messages</a>
-            <a class="user-area__link">Settings</a>
-            <a (click)="logout()" class="user-area__link">Logout</a>
+        <div class="side-menu__content">
+            <app-auth-btns *ngIf="!user"></app-auth-btns>
+            <div *ngIf="user" class="user-area">
+                <a (click)="goToProfile()" class="user-area__link">View Profile</a>
+                <a class="user-area__link">Notifications</a>
+                <a class="user-area__link">Messages</a>
+                <a class="user-area__link">Settings</a>
+                <a (click)="logout()" class="user-area__link">Logout</a>
+            </div>
+            <nav class="nav">
+                <app-nav-link 
+                *ngFor="let link of navLinks"
+                [title]="link.title"
+                [link]="link.link"
+                [img]="link.img"
+                ></app-nav-link>
+            </nav>
         </div>
-        <nav class="nav">
-            <app-nav-link 
-            *ngFor="let link of navLinks"
-            [title]="link.title"
-            [link]="link.link"
-            [img]="link.img"
-            ></app-nav-link>
-        </nav>
     </div>
 </div>

@@ -1,14 +1,15 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
+import { DiscussionsHomePage } from './discussions-home.page';
+import { DiscussionsHomePageRoutingModule } from './discussions-home-routing.module';
 import { CommonModule } from '@angular/common';
-import { AddDiscussionThreadPage } from './add-discussion-thread.page';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddDiscussionThreadPageRoutingModule } from "./add-discussion-thread-routing.module";
+
 
 @NgModule({
     imports : [
-        AddDiscussionThreadPageRoutingModule,
         CommonModule,
+        DiscussionsHomePageRoutingModule,
         ReactiveFormsModule,
         QuillModule.forRoot({
             modules : {
@@ -17,12 +18,13 @@ import { AddDiscussionThreadPageRoutingModule } from "./add-discussion-thread-ro
                 ]
             }
         })
-    ], 
+    ],
     declarations : [
-        AddDiscussionThreadPage
+        DiscussionsHomePage
     ], 
     exports : [
-        AddDiscussionThreadPage
+        DiscussionsHomePage, 
+        DiscussionsHomePageRoutingModule
     ]
 })
-export class AddDiscussionThreadPageModule{}
+export class DiscussionsHomePageModule{}
