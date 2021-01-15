@@ -21,7 +21,7 @@
         </button>
     </div>
     <div class="discussions-topics">
-        <a class="topic">
+        <a class="topic" routerLink="/discussions">
             All Recent
         </a>
         <a class="topic">
@@ -75,5 +75,23 @@
         <a class="topic">
             General
         </a>
+    </div>
+    <div *ngIf="!initialThreadsAreLoading" class="discussions-list">
+        <div *ngFor="let thread of threads" class="discussion-tile">
+            <img class="discussion-tile__img" [src]="thread.mainImage ? 'http://localhost:3000/public/uploads/discussions_images/' + thread.mainImage : '../../../assets/no_image.jpg'" alt="placeholder"/>
+            <article class="discussion-tile__content">
+                <a class="discussion-tile__header">{{ thread.headline }}</a>
+                <p class="discussion-tile__text">{{ thread.details }}</p>
+            </article>
+            <footer class="discussion-tile__footer">
+                <div class="discussion-tile__topic">
+                    {{ thread.topic }}
+                </div>
+                <div class="discussion-tile__user">
+                    <img src="../../../assets/user.svg" alt="user">
+                    <span>{{ thread.authorUsername }}</span>
+                </div>
+            </footer>
+        </div>
     </div>
 </div>

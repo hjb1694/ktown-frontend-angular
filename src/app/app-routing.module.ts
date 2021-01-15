@@ -3,7 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import {HomePage} from './pages/home/home.page';
 import { DenyIfNotAuth } from './route-guards/denyIfNotAuth.guard';
-import { CanAddNewThread } from './route-guards/discussions/canAddNewThread';
+import { CanAddNewThread } from './route-guards/discussions/canAddNewThread.guard';
 
 const routes: Routes = [
   {
