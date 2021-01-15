@@ -43,13 +43,7 @@ export class AddDiscussionThreadPage implements OnInit{
 
     ngOnInit(){
 
-        this.crudService.get('discussions/discussions-topics')
-        .subscribe((resp: any) => {
-            this.topics = resp.body;
-            this.pageIsLoading = false;
-        }, err => {
-            console.error(err);
-        });
+        this.fetchTopics();
 
         this.addDiscussionForm = new FormGroup({
             headline : new FormControl('', [
@@ -62,6 +56,16 @@ export class AddDiscussionThreadPage implements OnInit{
                 CustomValidators.minLength(50), 
                 DiscussionsValidators.imageLimit()
             ])
+        });
+    }
+
+    private fetchTopics(): void {
+        this.crudService.get('discussions/discussions-topics')
+        .subscribe((resp: any) => {
+            this.topics = resp.body;
+            this.pageIsLoading = false;
+        }, err => {
+            console.error(err);
         });
     }
 

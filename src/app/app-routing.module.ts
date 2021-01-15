@@ -26,6 +26,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-discussion-thread/add-discussion-thread.module').then(m => m.AddDiscussionThreadPageModule)
   },
   {
+    path : 'discussions/thread/:id', 
+    loadChildren: () => import('./pages/discussion-thread/discussion-thread.module').then(m => m.DiscussionThreadPageModule)
+  },
+  {
     path : 'discussions', 
     loadChildren: () => import('./pages/discussions-home/discussions-home.module').then(m => m.DiscussionsHomePageModule), 
   },

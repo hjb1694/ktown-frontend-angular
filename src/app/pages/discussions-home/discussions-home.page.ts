@@ -12,6 +12,7 @@ export class DiscussionsHomePage implements OnInit{
     public initialThreadsAreLoading: boolean = true;
     public threads: any = [];
     private offset = 10;
+    public topics: string[] = [];
 
     constructor(
         private sideMenuService: SideMenuService, 
@@ -21,11 +22,12 @@ export class DiscussionsHomePage implements OnInit{
     ngOnInit(){
 
         this.fetchInitialThreads();
+        this.fetchTopics();
 
     }
 
 
-    private fetchInitialThreads(){
+    private fetchInitialThreads(): void{
 
         this.crudService.get('discussions/threads?offset=0')
         .toPromise()
@@ -42,7 +44,16 @@ export class DiscussionsHomePage implements OnInit{
 
     }
 
-    public openSideMenu(){
+    private fetchTopics(): void{
+        this.crudService.get('discussions/discussions-topics')
+        .subscribe((resp: any) => {
+            this.topics = resp.body;
+        }, err => {
+            console.error(err);
+        });
+    }
+
+    public openSideMenu(): void{
 
         this.sideMenuService.openSideMenu();
 

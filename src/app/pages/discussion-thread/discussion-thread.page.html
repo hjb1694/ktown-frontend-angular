@@ -28,27 +28,11 @@
             {{ topic.topic }}
         </a>
     </div>
-    <div *ngIf="!initialThreadsAreLoading" class="discussions-list">
-        <div *ngFor="let thread of threads" class="discussion-tile">
-            <img class="discussion-tile__img" [src]="thread.mainImage ? 'http://localhost:3000/public/uploads/discussions_images/' + thread.mainImage : '../../../assets/no_image.jpg'" alt="placeholder"/>
-            <article class="discussion-tile__content">
-                <a 
-                [routerLink]="['/','discussions','thread', thread.discussionThreadId]" 
-                class="discussion-tile__header"
-                >
-                {{ thread.headline }}
-                </a>
-                <p class="discussion-tile__text">{{ thread.details }}</p>
-            </article>
-            <footer class="discussion-tile__footer">
-                <div class="discussion-tile__topic">
-                    {{ thread.topic }}
-                </div>
-                <div class="discussion-tile__user">
-                    <img src="../../../assets/user.svg" alt="user">
-                    <span>{{ thread.authorUsername }}</span>
-                </div>
-            </footer>
+    <div class="main-area">
+        <div *ngIf="!threadLoading" class="discussion-thread-main">
+            <div class="thread">
+                <div class="thread__details" [innerHTML]="thread.details | safeHtml"></div>
+            </div>
         </div>
     </div>
 </div>
