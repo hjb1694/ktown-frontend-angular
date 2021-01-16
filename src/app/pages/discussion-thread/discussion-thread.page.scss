@@ -59,20 +59,24 @@
     background:#fcfcfc;
 }
 
-.discussion-thread-main{
+.discussion-thread-main, .reply-main-container{
     max-width:90rem;
     padding:1rem;
     border:2px solid #8a7e4a;
-    margin:3rem auto 0 auto;
+    margin:4rem auto 0 auto;
     border-radius:1rem;
     position:relative;
     background: #f1f0eb;
 }
 
+.reply-main-container{
+    margin-top:6rem;
+}
+
 .user-image{
     position:absolute;
-    width:8rem;
-    height:8rem;
+    width:6rem;
+    height:6rem;
     object-fit:cover;
     object-position:center;
     border-radius:90%;
@@ -81,7 +85,7 @@
     border:2px solid #8a7e4a;
 }
 
-.thread{
+.thread, .reply{
     overflow:hidden;
     box-shadow:0 0 .5rem rgba(0,0,0,.4);
     border-radius:1rem;
@@ -89,9 +93,14 @@
     background:#fff;
     margin-top:1rem;
 
-    &__details {
-        font-size:1.4rem;
+    &__details, &__content {
+        font-size:1.8rem;
     }
+}
+
+.reply{
+    margin-top:2rem;
+    white-space:pre-wrap;
 }
 
 .thread-headline{
@@ -100,12 +109,12 @@
     user-select:none;
 }
 
-.thread-info-controls{
+.thread-info-controls, .reply-info-controls{
     display:flex;
 }
 
-.thread-author{
-    margin-left:10rem;
+.thread-author, .reply-author{
+    margin-left:8rem;
 
     &__username{
         font-size:2rem;

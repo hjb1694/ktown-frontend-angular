@@ -56,6 +56,28 @@
         <app-thread-reply-form 
         *ngIf="!threadLoading"
         [thread-id]="thread.discussionThreadId"
+        (reply-successful)="fetchReplies()"
         ></app-thread-reply-form>
+        <div *ngIf="!repliesLoading" class="replies">
+            <div *ngFor="let reply of replies" class="reply-main-container">
+                <img 
+                [src]="reply.profileImage ? 'http://localhost:3000/public/uploads/profile-images/' + reply.profileImage + '.png' : '../../../assets/no-user.png'" 
+                [alt]="reply.replyAuthorUsername + ' Image'"
+                class="user-image"
+                />
+                <div class="reply-info-controls">
+                    <div class="reply-author">
+                        <h2 
+                        [routerLink]="['/','profile','user',reply.replyAuthorUsername]" 
+                        class="reply-author__username"
+                        >
+                            {{ reply.replyAuthorUsername }}
+                        </h2>
+                        <app-role-badge [role]="reply.replyAuthorRole"></app-role-badge>
+                    </div>
+                </div>
+                <div class="reply reply__content" [innerHTML]="reply.replyContent | safeHtml"></div>
+            </div>
+        </div>
     </div>
 </div>

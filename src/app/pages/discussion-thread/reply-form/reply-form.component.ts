@@ -18,7 +18,7 @@ export class ThreadReplyFormComponent implements OnInit{
     public formErrors: string[] = [];
     public replyProcessing: boolean = false;
     @Input('thread-id') threadId: number;
-    @Output() replySuccessful = new EventEmitter<boolean>();
+    @Output('reply-successful') replySuccessful = new EventEmitter<boolean>();
 
     constructor(
         private crudService: CrudService, 

@@ -12,7 +12,7 @@ export class DiscussionThreadPage implements OnInit{
 
     public topics: any = [];
     public thread: any;
-    public replies: any;
+    public replies: any = [];
     public threadLoading: boolean = true;
     public repliesLoading: boolean = true;
     public threadId: string;
