@@ -1,0 +1,18 @@
+<form 
+[formGroup]="replyForm" 
+class="reply-box-container" 
+id="reply-box-container"
+(ngSubmit)="submitReply()"
+>
+    <h2 class="reply-box-heading">Reply Here</h2>
+    <textarea 
+    class="text-area reply-field" 
+    placeholder="Write Something Interesting..."
+    maxlength="2000"
+    formControlName="reply"
+    ></textarea>
+    <button class="btn reply-subbut">Submit</button>
+    <ul *ngIf="formErrors.length" class="errbox">
+        <li *ngFor="let err of formErrors">{{ err }}</li>
+    </ul>
+</form>

@@ -3,17 +3,21 @@ import { NgModule } from '@angular/core';
 import { DiscussionThreadPageRoutingModule } from './discussion-thread-routing.module';
 import { DiscussionThreadPage } from './discussion-thread.page';
 import { SafeHtmlPipe } from '../../pipes/safeHtml.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ThreadReplyComponentModule } from './reply-form/reply-form.module';
 
 
 
 @NgModule({
     imports : [
         DiscussionThreadPageRoutingModule, 
-        CommonModule
+        CommonModule, 
+        ReactiveFormsModule, 
+        ThreadReplyComponentModule
     ], 
     declarations : [
         SafeHtmlPipe,
-        DiscussionThreadPage
+        DiscussionThreadPage, 
     ], 
     exports : [
         DiscussionThreadPage

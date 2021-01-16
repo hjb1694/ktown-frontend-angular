@@ -30,9 +30,83 @@
     </div>
     <div class="main-area">
         <div *ngIf="!threadLoading" class="discussion-thread-main">
+            <img 
+            [src]="thread.mainImage ? 'http://localhost:3000/public/uploads/profile-images/' + thread.profileImage + '.png' : '../../../assets/no-user.png'" 
+            alt="user"
+            class="user-image"
+            >
+            <div class="thread-info-controls">
+                <div class="thread-author">
+                    <h2 
+                    [routerLink]="['/','profile','user',thread.authorUsername]" 
+                    class="thread-author__username"
+                    >
+                        {{ thread.authorUsername }}
+                    </h2>
+                    <ng-container [ngSwitch]="thread.role">
+                        <p 
+                        *ngSwitchCase="2" 
+                        class="thread-author__role"
+                        >
+                            <img 
+                            class="badge" 
+                            src="../../../assets/police-badge.png" 
+                            alt="badge">
+                            Bronze Moderator
+                        </p>
+                        <p 
+                        *ngSwitchCase="3"
+                        class="thread-author__role"
+                        >
+                            <img 
+                            class="badge" 
+                            src="../../../assets/police-badge.png" 
+                            alt="badge">
+                            Silver Moderator
+                        </p>
+                        <p 
+                        *ngSwitchCase="4"
+                        class="thread-author__role"
+                        >
+                            <img 
+                            class="badge" 
+                            src="../../../assets/police-badge.png" 
+                            alt="badge">
+                            Gold Moderator
+                        </p>
+                        <p 
+                        *ngSwitchCase="5"
+                        class="thread-author__role"
+                        >
+                            <img 
+                            class="badge" 
+                            src="../../../assets/police-badge.png" 
+                            alt="badge">
+                            Staff
+                        </p>
+                        <p 
+                        *ngSwitchCase="6"
+                        class="thread-author__role"
+                        >
+                            <img 
+                            class="badge" 
+                            src="../../../assets/police-badge.png" 
+                            alt="badge">
+                            Administrator
+                        </p>
+                    </ng-container>
+                </div>
+            </div>
+            <p class="thread-headline">
+                {{ thread.headline }}
+            </p>
             <div class="thread">
                 <div class="thread__details" [innerHTML]="thread.details | safeHtml"></div>
             </div>
         </div>
+        <app-thread-reply-form 
+        *ngIf="!threadLoading"
+        [thread-id]="thread.discussionThreadId"
+        ></app-thread-reply-form>
     </div>
 </div>
