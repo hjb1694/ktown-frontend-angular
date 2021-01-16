@@ -43,58 +43,7 @@
                     >
                         {{ thread.authorUsername }}
                     </h2>
-                    <ng-container [ngSwitch]="thread.role">
-                        <p 
-                        *ngSwitchCase="2" 
-                        class="thread-author__role"
-                        >
-                            <img 
-                            class="badge" 
-                            src="../../../assets/police-badge.png" 
-                            alt="badge">
-                            Bronze Moderator
-                        </p>
-                        <p 
-                        *ngSwitchCase="3"
-                        class="thread-author__role"
-                        >
-                            <img 
-                            class="badge" 
-                            src="../../../assets/police-badge.png" 
-                            alt="badge">
-                            Silver Moderator
-                        </p>
-                        <p 
-                        *ngSwitchCase="4"
-                        class="thread-author__role"
-                        >
-                            <img 
-                            class="badge" 
-                            src="../../../assets/police-badge.png" 
-                            alt="badge">
-                            Gold Moderator
-                        </p>
-                        <p 
-                        *ngSwitchCase="5"
-                        class="thread-author__role"
-                        >
-                            <img 
-                            class="badge" 
-                            src="../../../assets/police-badge.png" 
-                            alt="badge">
-                            Staff
-                        </p>
-                        <p 
-                        *ngSwitchCase="6"
-                        class="thread-author__role"
-                        >
-                            <img 
-                            class="badge" 
-                            src="../../../assets/police-badge.png" 
-                            alt="badge">
-                            Administrator
-                        </p>
-                    </ng-container>
+                    <app-role-badge [role]="thread.role"></app-role-badge>
                 </div>
             </div>
             <p class="thread-headline">

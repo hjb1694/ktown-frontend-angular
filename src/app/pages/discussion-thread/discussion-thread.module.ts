@@ -5,6 +5,7 @@ import { DiscussionThreadPage } from './discussion-thread.page';
 import { SafeHtmlPipe } from '../../pipes/safeHtml.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThreadReplyComponentModule } from './reply-form/reply-form.module';
+import { RoleBadgeComponent } from './role-badge/role-badge.component';
 
 
 
@@ -18,6 +19,7 @@ import { ThreadReplyComponentModule } from './reply-form/reply-form.module';
     declarations : [
         SafeHtmlPipe,
         DiscussionThreadPage, 
+        RoleBadgeComponent
     ], 
     exports : [
         DiscussionThreadPage

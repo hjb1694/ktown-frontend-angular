@@ -12,7 +12,10 @@ export class DiscussionThreadPage implements OnInit{
 
     public topics: any = [];
     public thread: any;
+    public replies: any;
     public threadLoading: boolean = true;
+    public repliesLoading: boolean = true;
+    public threadId: string;
 
     constructor(
         private crudService: CrudService, 
@@ -25,7 +28,9 @@ export class DiscussionThreadPage implements OnInit{
         this.fetchTopics();
 
         this.route.params.subscribe(params => {
-            this.fetchThread(params['id']);
+            this.threadId = params['id'];
+            this.fetchThread();
+            this.fetchReplies();
         });
 
     }
@@ -39,8 +44,8 @@ export class DiscussionThreadPage implements OnInit{
         });
     }
 
-    private fetchThread(threadId: string): void {
-        this.crudService.get(`discussions/thread/${threadId}`)
+    private fetchThread(): void {
+        this.crudService.get(`discussions/thread/${this.threadId}`)
         .toPromise()
         .then((resp: any) => {
             this.thread = resp.body.thread;
@@ -50,6 +55,21 @@ export class DiscussionThreadPage implements OnInit{
         })
         .finally(() => {
             this.threadLoading = false;
+        });
+    }
+
+    private fetchReplies(): void {
+        this.crudService.get(`discussions/replies/${this.threadId}`)
+        .toPromise()
+        .then((resp: any) => {
+            console.log(resp);
+            this.replies = resp.body.replies;
+        })
+        .catch(err => {
+            console.error(err);
+        })
+        .finally(() => {
+            this.repliesLoading = false;
         });
     }
 
