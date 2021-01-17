@@ -54,7 +54,7 @@
             </div>
         </div>
         <app-thread-reply-form 
-        *ngIf="!threadLoading"
+        *ngIf="!threadLoading && isLoggedIn"
         [thread-id]="thread.discussionThreadId"
         (reply-successful)="fetchReplies()"
         ></app-thread-reply-form>
@@ -75,6 +75,24 @@
                         </h2>
                         <app-role-badge [role]="reply.replyAuthorRole"></app-role-badge>
                     </div>
+                    <button 
+                    *ngIf="reply.actions" 
+                    class="reply-action-button"
+                    (click)="toggleDropdown(dropdown)"
+                    >Actions</button>
+                    <ul class="action-dropdown" #dropdown>
+                        <li class="action-dropdown__item">Reply</li>
+                        <li
+                        *ngIf="reply.actions?.canLikeOrDislike" class="action-dropdown__item"
+                        >
+                        Like
+                        </li>
+                        <li 
+                        *ngIf="reply.actions?.canLikeOrDislike" class="action-dropdown__item"
+                        >
+                        Dislike
+                        </li>
+                    </ul>
                 </div>
                 <div class="reply reply__content" [innerHTML]="reply.replyContent | safeHtml"></div>
             </div>

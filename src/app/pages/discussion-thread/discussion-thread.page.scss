@@ -111,6 +111,7 @@
 
 .thread-info-controls, .reply-info-controls{
     display:flex;
+    justify-content:space-between;
 }
 
 .thread-author, .reply-author{
@@ -122,6 +123,35 @@
         top:-3rem;
         color:#000;
         cursor:pointer;
+    }
+}
+
+.reply-action-button{
+    position:absolute;
+    top:0;
+    right:0;
+    padding:1rem;
+    border-radius:0 .5rem 0 1rem;
+    border:0;
+    background:linear-gradient(to bottom right, #265386, #5589c5);
+    color:#fff;
+    font-size:1.4rem;
+    outline:none;
+}
+
+.action-dropdown{
+    position:absolute;
+    top:3.6rem;
+    right:0;
+    background:#fff;
+    list-style:none;
+    width:10rem;
+    box-shadow:0 0 .5rem rgba(0,0,0,.4);
+    display:none;
+
+    &__item{
+        font-size:2rem;
+        padding:.5rem;
     }
 }
 
