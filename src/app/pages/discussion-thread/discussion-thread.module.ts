@@ -6,6 +6,7 @@ import { SafeHtmlPipe } from '../../pipes/safeHtml.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ThreadReplyComponentModule } from './reply-form/reply-form.module';
 import { RoleBadgeComponent } from './role-badge/role-badge.component';
+import { HeaderBarComponentModule } from 'src/app/global-components/header-bar/header-bar.module';
 
 
 
@@ -14,7 +15,8 @@ import { RoleBadgeComponent } from './role-badge/role-badge.component';
         DiscussionThreadPageRoutingModule, 
         CommonModule, 
         ReactiveFormsModule, 
-        ThreadReplyComponentModule
+        ThreadReplyComponentModule, 
+        HeaderBarComponentModule
     ], 
     declarations : [
         SafeHtmlPipe,

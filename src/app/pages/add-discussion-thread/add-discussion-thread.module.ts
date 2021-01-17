@@ -4,6 +4,7 @@ import { AddDiscussionThreadPage } from './add-discussion-thread.page';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddDiscussionThreadPageRoutingModule } from "./add-discussion-thread-routing.module";
+import { HeaderBarComponentModule } from "src/app/global-components/header-bar/header-bar.module";
 
 @NgModule({
     imports : [
@@ -16,7 +17,8 @@ import { AddDiscussionThreadPageRoutingModule } from "./add-discussion-thread-ro
                     ['bold','italic','image']
                 ]
             }
-        })
+        }), 
+        HeaderBarComponentModule
     ], 
     declarations : [
         AddDiscussionThreadPage

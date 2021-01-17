@@ -9,6 +9,7 @@ import {ChangeImageModalComponent} from './change-image-modal/change-image-modal
 
 import {ImageCropperModule} from 'ngx-image-cropper';
 import { EditProfileRoutingModule } from './edit-profile-routing.module';
+import { HeaderBarComponentModule } from 'src/app/global-components/header-bar/header-bar.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { EditProfileRoutingModule } from './edit-profile-routing.module';
         RouterModule, 
         ImageCropperModule, 
         ReactiveFormsModule,
-        EditProfileRoutingModule
+        EditProfileRoutingModule, 
+        HeaderBarComponentModule
     ], 
     declarations : [
         EditProfilePage, 

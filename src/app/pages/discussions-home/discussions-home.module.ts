@@ -4,6 +4,7 @@ import { DiscussionsHomePageRoutingModule } from './discussions-home-routing.mod
 import { CommonModule } from '@angular/common';
 import { QuillModule } from 'ngx-quill';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderBarComponentModule } from 'src/app/global-components/header-bar/header-bar.module';
 
 
 @NgModule({
@@ -17,14 +18,15 @@ import { ReactiveFormsModule } from '@angular/forms';
                     ['bold','italic','image']
                 ]
             }
-        })
+        }), 
+        HeaderBarComponentModule
     ],
     declarations : [
         DiscussionsHomePage
     ], 
     exports : [
         DiscussionsHomePage, 
-        DiscussionsHomePageRoutingModule
+        DiscussionsHomePageRoutingModule, 
     ]
 })
 export class DiscussionsHomePageModule{}
