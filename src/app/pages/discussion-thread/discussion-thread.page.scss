@@ -152,6 +152,48 @@
     &__item{
         font-size:2rem;
         padding:.5rem;
+        cursor:pointer;
+
+        &:hover{
+            background:#e8f4ff;
+        }
+    }
+}
+
+.likes-dislikes-area{
+    margin-top:1rem;
+    display:flex;
+    justify-content:space-between
+}
+
+.likes-dislikes-totals{
+    font-size:1.8rem;
+}
+
+.likes-total, .dislikes-total{
+    display:inline-block;
+    font-weight:bold;
+}
+
+.likes-total{
+    margin-right:1rem;
+    color:rgb(64, 192, 64);
+}
+
+.dislikes-total{
+    color:red;
+}
+
+.user-like-dislike-action{
+    font-weight:bold;
+    font-size:1.8rem;
+
+    &--like{
+        color:rgb(64, 192, 64);
+    }
+
+    &--dislike{
+        color:red;
     }
 }
 

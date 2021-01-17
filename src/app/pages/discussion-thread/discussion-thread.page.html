@@ -78,17 +78,37 @@
                         <li class="action-dropdown__item">Reply</li>
                         <li
                         *ngIf="reply.actions?.canLikeOrDislike" class="action-dropdown__item"
+                        (click)="addLikeOrDislike(reply.replyId, 'like', dropdown)"
                         >
                         Like
                         </li>
                         <li 
                         *ngIf="reply.actions?.canLikeOrDislike" class="action-dropdown__item"
+                        (click)="addLikeOrDislike(reply.replyId, 'dislike', dropdown)"
                         >
                         Dislike
                         </li>
                     </ul>
                 </div>
                 <div class="reply reply__content" [innerHTML]="reply.replyContent | safeHtml"></div>
+                <div class="likes-dislikes-area">
+                    <div class="likes-dislikes-totals">
+                        <span *ngIf="reply.likeCount > 0" class="likes-total">{{ reply.likeCount }} Likes</span>
+                        <span *ngIf="reply.dislikeCount > 0" class="dislikes-total">{{ reply.dislikeCount }} Dislikes</span>
+                    </div>
+                    <div 
+                    class="user-like-dislike-action user-like-dislike-action--like" 
+                    *ngIf="reply.actions?.likeOrDislikeAction === 'like'"
+                    >
+                    You liked this!
+                    </div>
+                    <div 
+                    class="user-like-dislike-action user-like-dislike-action--dislike"
+                    *ngIf="reply.actions?.likeOrDislikeAction === 'dislike'"
+                    >
+                    You disliked this!
+                    </div>
+                </div>
             </div>
         </div>
     </div>

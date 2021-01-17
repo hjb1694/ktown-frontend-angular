@@ -22,8 +22,7 @@ export class DiscussionThreadPage implements OnInit{
     public isLoggedIn: boolean;
 
     constructor(
-        private crudService: CrudService, 
-        private sideMenuService: SideMenuService, 
+        private crudService: CrudService,
         private route: ActivatedRoute, 
         private authService: AuthService
     ){}
@@ -103,9 +102,14 @@ export class DiscussionThreadPage implements OnInit{
     
                         for(let action of actions){
                             for(let reply of repliesTmp){
-                                if(action.replyId == reply.replyId){
-                                    reply.actions = action;
-                                }
+                                console.log(reply.replyAuthorId);
+                                if(reply.replyAuthorUsername == user.username){
+                                    reply.actions = null;
+                                }else{
+                                    if(action.replyId == reply.replyId){
+                                        reply.actions = action;
+                                    }
+                                } 
                             }
                         }
 
@@ -131,15 +135,40 @@ export class DiscussionThreadPage implements OnInit{
 
     }
 
-    public openSideMenu(): void{
+    public toggleDropdown(dropdown: HTMLUListElement): void{
 
-        this.sideMenuService.openSideMenu();
+        dropdown.style.display = dropdown.style.display == 'block' ? 'none' : 'block';
 
     }
 
-    public toggleDropdown(dropdown: HTMLUListElement){
+    public addLikeOrDislike(replyId: number, action: string, dropdown: HTMLUListElement): void {
 
-        dropdown.style.display = dropdown.style.display == 'block' ? 'none' : 'block';
+        dropdown.style.display = 'none';
+
+        this.crudService.post(
+            'discussions/add-like-or-dislike', 
+            {replyId, action}, 
+            true
+        ).toPromise()
+        .then(() => {
+            const replyObj = this.replies.filter(reply => reply.replyId == replyId);
+
+            console.log(replyObj);
+
+            replyObj[0].actions.canLikeOrDislike = false;
+            replyObj[0].actions.likeOrDislikeAction = action;
+
+            if(action === 'like'){
+                replyObj[0].likeCount++;
+            }else if(action === 'dislike'){
+                replyObj[0].dislikeCount++;
+            }
+
+        })
+        .catch(err => {
+            console.error(err);
+        })
+
 
     }
 
